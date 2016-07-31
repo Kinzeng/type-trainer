@@ -4,7 +4,7 @@ import {COUNTDOWN, ACTIVE, DONE} from '../../constants/typer'
 let initialState = {stage: 'init', text: '', wpm: ''}
 
 function calculateWPM (text, time) {
-  return ((text.length / 5) / (time / 6000)).toFixed(0)
+  return ((text.length / 5) / (time / 6000)).toFixed(1)
 }
 
 export default function (state = initialState, action) {

@@ -1,16 +1,14 @@
 import React from 'react'
-import {Link} from 'react-router'
 
 const appProps = {
   style: {
-    height: '100%', // Firefox
-    minHeight: '100%', // Safari
+    height: '100%',
     width: '100%',
     display: 'flex',
     flexFlow: 'column nowrap',
-    justifyContent: 'space-between', // header and footer at the extremes
-    alignItems: 'stretch',
-    backgroundColor: 'rgba(255, 255, 255, 0)', // placeholder
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0)',
     fontFamily: 'sans-serif'
   }
 }
