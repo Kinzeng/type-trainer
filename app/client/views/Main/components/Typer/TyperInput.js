@@ -16,7 +16,7 @@ export default class TyperInput extends React.Component {
     if (this.props.active) {
       if (e.target.value === this.props.text) {
         this.setState({inputValue: ''})
-        this.props.finish()
+        this.props.finishTyping()
       } else {
         this.setState({inputValue: e.target.value})
       }
@@ -26,9 +26,12 @@ export default class TyperInput extends React.Component {
   render () {
     const inputProps = {
       value: this.state.inputValue,
-      onChange: this.onChange.bind(this)
+      onChange: this.onChange.bind(this),
+      style: {
+        width: '100%'
+      }
     }
 
-    return <input {...inputProps} />
+    return <textarea {...inputProps} />
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {typerState} from '..'
+import {COUNTDOWN, ACTIVE, DONE} from '../../../constants/typer'
 
 export default class Timer extends React.Component {
   constructor (props) {
@@ -8,7 +8,7 @@ export default class Timer extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.state === typerState.DONE) {
+    if (nextProps.stage === DONE) {
       clearInterval(this.state.timer)
       clearInterval(this.state.preciseTimer)
     }
@@ -17,6 +17,7 @@ export default class Timer extends React.Component {
   startCountdown () {
     this.setState({minutes: 0, seconds: 3})
     this.props.startCountdown()
+
     const timer = setInterval(() => {
       const nextSecond = this.state.seconds - 1
       if (nextSecond < 1) {
@@ -33,11 +34,10 @@ export default class Timer extends React.Component {
     const timer = setInterval(this.tick.bind(this), 1000)
     const preciseTimer = setInterval(this.preciseTick.bind(this), 10)
     this.setState({timer, preciseTimer})
-    this.props.start()
+    this.props.startTyping()
   }
 
   tick () {
-    console.log(this.state.minutes, this.state.seconds)
     let nextMinute = this.state.minutes
     let nextSecond = this.state.seconds - 1
     if (nextSecond < 1) {
@@ -47,7 +47,7 @@ export default class Timer extends React.Component {
 
     if (nextMinute < 0) {
       console.log(nextMinute, nextSecond)
-      this.finish()
+      this.finishTyping()
     } else {
       this.setState({minutes: nextMinute, seconds: nextSecond})
     }
@@ -58,7 +58,6 @@ export default class Timer extends React.Component {
   }
 
   finish () {
-    console.log(this.state.timer)
     clearInterval(this.state.timer)
     clearInterval(this.state.preciseTimer)
     this.setState({timer: null})
@@ -67,12 +66,12 @@ export default class Timer extends React.Component {
 
   render () {
     let timerStyle = {
-      color: this.props.state === typerState.ACTIVE ? 'black' : 'red'
+      color: this.props.stage === ACTIVE ? 'green' : 'red'
     }
 
     return (
       <div>
-        {this.props.state === typerState.ACTIVE || this.props.state === typerState.COUNTDOWN
+        {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
           ? <p style={timerStyle}>{`${this.state.minutes}:${this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds}`}</p>
           : <button onClick={this.startCountdown.bind(this)}>Start!</button>
         }
