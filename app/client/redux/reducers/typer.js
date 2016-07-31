@@ -1,10 +1,14 @@
-import {SET_STAGE, START_COUNTDOWN, START_TYPING, FINISH_TYPING, SET_TEXT} from '../actions/types'
+import {START_COUNTDOWN, START_TYPING, FINISH_TYPING, SET_TEXT} from '../actions/types'
 import {COUNTDOWN, ACTIVE, DONE} from '../../constants/typer'
 
 let initialState = {stage: 'init', text: '', wpm: ''}
 
 function calculateWPM (text, time) {
   return ((text.length / 5) / (time / 6000)).toFixed(1)
+}
+
+function calculateAccuracy (text, chars) {
+  return `${((text.length / chars) * 100).toFixed(2)}%`
 }
 
 export default function (state = initialState, action) {
@@ -25,10 +29,12 @@ export default function (state = initialState, action) {
 
     case FINISH_TYPING: {
       const wpm = calculateWPM(state.text, action.time)
+      const accuracy = calculateAccuracy(state.text, action.chars)
       return {
         ...state,
         stage: DONE,
-        wpm
+        wpm,
+        accuracy
       }
     }
 
@@ -36,13 +42,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         text: action.text
-      }
-    }
-
-    case SET_STAGE: {
-      return {
-        ...state,
-        stage: action.stage
       }
     }
 

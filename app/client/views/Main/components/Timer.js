@@ -46,8 +46,7 @@ export default class Timer extends React.Component {
     }
 
     if (nextMinute < 0) {
-      console.log(nextMinute, nextSecond)
-      this.finishTyping()
+      this.finish()
     } else {
       this.setState({minutes: nextMinute, seconds: nextSecond})
     }
@@ -61,7 +60,7 @@ export default class Timer extends React.Component {
     clearInterval(this.state.timer)
     clearInterval(this.state.preciseTimer)
     this.setState({timer: null})
-    this.props.finish()
+    this.props.finishTyping()
   }
 
   render () {
@@ -69,12 +68,20 @@ export default class Timer extends React.Component {
       color: this.props.stage === ACTIVE ? 'green' : 'red'
     }
 
+    const buttonProps = {
+      onClick: this.startCountdown.bind(this),
+      style: {
+        fontSize: '18px'
+      }
+    }
+
     return (
       <div>
         {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
           ? <p style={timerStyle}>{`${this.state.minutes}:${this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds}`}</p>
-          : <button onClick={this.startCountdown.bind(this)}>Start!</button>
+          : <button {...buttonProps}>Start!</button>
         }
+        <button onClick={this.finish.bind(this)}>Done</button>
       </div>
     )
   }

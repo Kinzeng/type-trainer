@@ -18,7 +18,7 @@ export default class TextBlock extends React.Component {
     const text = textArray.map((word, index) => {
       let style = {
         marginRight: '5px',
-        color: index === this.props.currentIndex ? 'green' : 'black'
+        color: !this.props.done && index === this.props.currentIndex ? 'green' : 'black'
       }
 
       return <p key={index} style={style}>{word}</p>

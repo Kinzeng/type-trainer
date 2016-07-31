@@ -20,7 +20,7 @@ const mainProps = {
 class Main extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {text: '', time: 0}
+    this.state = {text: '', time: 0, chars: 0}
   }
 
   // don't update if only the time changed
@@ -41,12 +41,16 @@ class Main extends React.Component {
   }
 
   finishTyping () {
-    this.props.finishTyping(this.state.time)
-    this.setState({time: 0})
+    this.props.finishTyping(this.state.time, this.state.chars)
+    this.setState({time: 0, chars: 0})
   }
 
   incrementTime () {
     this.setState({time: this.state.time + 1})
+  }
+
+  incrementChars () {
+    this.setState({chars: this.state.chars + 1})
   }
 
   render () {
@@ -61,11 +65,13 @@ class Main extends React.Component {
     const typerProps = {
       stage: this.props.stage,
       finishTyping: this.finishTyping.bind(this),
-      setText: this.props.setText
+      setText: this.props.setText,
+      incrementChars: this.incrementChars.bind(this)
     }
 
     const statsProps = {
-      wpm: this.props.wpm
+      wpm: this.props.wpm,
+      accuracy: this.props.accuracy
     }
 
     return (
@@ -84,7 +90,8 @@ const mapStateToProps = (state) => {
   return {
     stage: state.typer.stage,
     text: state.typer.text,
-    wpm: state.typer.wpm
+    wpm: state.typer.wpm,
+    accuracy: state.typer.accuracy
   }
 }
 

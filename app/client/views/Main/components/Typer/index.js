@@ -42,17 +42,19 @@ export default class Typer extends React.Component {
     const done = this.props.stage === DONE
 
     const textProps = {
+      done,
       text: this.state.text,
       currentIndex: this.state.currentIndex
     }
 
     const inputProps = {
       active,
-      done,
+      countdown,
       lastWord: this.state.lastWord,
       nextWord: this.state.nextWord,
       getNextWord: this.getNextWord.bind(this),
-      finishTyping: this.props.finishTyping
+      finishTyping: this.props.finishTyping,
+      incrementChars: this.props.incrementChars
     }
 
     if (active || countdown || done) {

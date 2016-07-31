@@ -6,8 +6,18 @@ export default class TyperInput extends React.Component {
     this.state = {inputValue: ''}
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.active || nextProps.countdown) {
+      this.input.focus()
+    }
+  }
+
   onChange (e) {
     if (this.props.active) {
+      if (this.state.inputValue.length < e.target.value.length) {
+        this.props.incrementChars()
+      }
+
       if (this.props.lastWord && e.target.value === this.props.nextWord) {
         this.setState({inputValue: ''})
         this.props.finishTyping()
@@ -24,6 +34,8 @@ export default class TyperInput extends React.Component {
     const inputProps = {
       value: this.state.inputValue,
       onChange: this.onChange.bind(this),
+      autoFocus: true,
+      ref: (ref) => { this.input = ref },
       style: {
         width: '100%',
         backgroundColor: (this.props.nextWord + ' ').startsWith(this.state.inputValue) ? 'white' : 'rgb(255,125,125)',
