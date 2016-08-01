@@ -31,7 +31,11 @@ export default class Timer extends React.Component {
 
   start () {
     this.setState({minutes: 1, seconds: 0})
+    // start a timer to display seconds
     const timer = setInterval(this.tick.bind(this), 1000)
+    // start another timer that is used to calculate WPM.
+    // a tick needs to be much faster than a second so that
+    // WPM is more accurate
     const preciseTimer = setInterval(this.preciseTick.bind(this), 10)
     this.setState({timer, preciseTimer})
     this.props.startTyping()

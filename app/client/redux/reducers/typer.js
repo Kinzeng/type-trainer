@@ -8,6 +8,7 @@ function calculateWPM (text, time) {
 }
 
 function calculateAccuracy (text, chars) {
+  console.log(text.length, chars)
   return `${((text.length / chars) * 100).toFixed(2)}%`
 }
 

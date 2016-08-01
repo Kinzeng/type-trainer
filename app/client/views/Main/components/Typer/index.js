@@ -21,7 +21,8 @@ export default class Typer extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.stage !== this.props.stage && nextProps.stage === COUNTDOWN) {
-      const text = passages[Math.floor(Math.random() * passages.length)]
+      const index = Math.floor(Math.random() * passages.length)
+      const text = passages[index].replace(/\r?\n|\r/g, ' ')
       const textArray = text.split(' ')
       this.setState({text, textArray, nextWord: textArray[0], lastWord: false, currentIndex: 0})
       this.props.setText(text)

@@ -41,7 +41,7 @@ class Main extends React.Component {
   }
 
   finishTyping () {
-    this.props.finishTyping(this.state.time, this.state.chars)
+    this.props.finishTyping(this.state.time, this.state.chars + 1)
     this.setState({time: 0, chars: 0})
   }
 
