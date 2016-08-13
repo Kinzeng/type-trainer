@@ -10,7 +10,6 @@ export default class TyperInput extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (this.props.stage !== nextProps.stage &&
        (nextProps.stage === ACTIVE || nextProps.stage === COUNTDOWN)) {
-      console.log(this.props.stage, nextProps.stage)
       this.setState({inputValue: ''})
       this.input.focus()
     }
