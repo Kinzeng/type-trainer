@@ -19,6 +19,10 @@ export default class Typer extends React.Component {
     this.state = {text: '', currentIndex: 0, textArray: [], nextWord: '', lastWord: false}
   }
 
+  componentWillMount () {
+    this.setState({text: this.props.text})
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.stage !== this.props.stage && nextProps.stage === COUNTDOWN) {
       const index = Math.floor(Math.random() * passages.length)

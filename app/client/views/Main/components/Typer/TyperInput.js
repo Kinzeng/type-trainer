@@ -1,5 +1,5 @@
 import React from 'react'
-import {COUNTDOWN, ACTIVE} from '../../../../constants/typer'
+import {COUNTDOWN, ACTIVE, DONE} from '../../../../constants/typer'
 
 export default class TyperInput extends React.Component {
   constructor (props) {
@@ -34,6 +34,9 @@ export default class TyperInput extends React.Component {
   }
 
   render () {
+    const correct = (this.props.nextWord + ' ').startsWith(this.state.inputValue)
+    const backgroundColor = correct ? 'white' : 'rgb(255,125,125)'
+
     const inputProps = {
       value: this.state.inputValue,
       onChange: this.onChange.bind(this),
@@ -41,9 +44,10 @@ export default class TyperInput extends React.Component {
       ref: (ref) => { this.input = ref },
       style: {
         width: '100%',
-        backgroundColor: (this.props.nextWord + ' ').startsWith(this.state.inputValue) ? 'white' : 'rgb(255,125,125)',
+        backgroundColor,
         fontSize: '18px'
-      }
+      },
+      disabled: this.props.stage === DONE
     }
 
     return <input {...inputProps} />

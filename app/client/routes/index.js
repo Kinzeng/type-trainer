@@ -3,13 +3,13 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import App from '../containers/App'
 
 import Main from '../views/Main'
-import Bye from '../views/Bye'
+import Stats from '../views/Stats'
 
 export default (
   <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Main} />
-      <Route path='/bye' component={Bye} />
+      <Route path='/stats' component={Stats} />
     </Route>
   </Router>
 )

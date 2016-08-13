@@ -6,7 +6,7 @@ const statsProps = {
   }
 }
 
-export default class Stats extends React.Component {
+export default class Results extends React.Component {
   render () {
     return <div {...statsProps}>{`WPM: ${this.props.wpm} Accuracy: ${this.props.accuracy}`}</div>
   }

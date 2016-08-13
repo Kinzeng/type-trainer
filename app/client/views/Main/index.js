@@ -3,9 +3,9 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import Timer from './components/Timer'
 import Typer from './components/Typer'
-import Stats from './components/Stats'
+import Results from './components/Results'
 import {startCountdown, startTyping, finishTyping, setText} from '../../redux/actions/creators/typer'
-import {COUNTDOWN, ACTIVE, DONE} from '../../constants/typer'
+import {DONE} from '../../constants/typer'
 
 const mainProps = {
   style: {
@@ -64,6 +64,7 @@ class Main extends React.Component {
 
     const typerProps = {
       stage: this.props.stage,
+      text: this.props.text,
       finishTyping: this.finishTyping.bind(this),
       setText: this.props.setText,
       incrementChars: this.incrementChars.bind(this)
@@ -79,7 +80,7 @@ class Main extends React.Component {
         <Timer {...timerProps} />
         <Typer {...typerProps} />
         {this.props.stage === DONE &&
-          <Stats {...statsProps} />
+          <Results {...statsProps} />
         }
       </div>
     )
