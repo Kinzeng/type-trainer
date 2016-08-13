@@ -1,4 +1,5 @@
 import React from 'react'
+import {COUNTDOWN, ACTIVE} from '../../../../constants/typer'
 
 export default class TyperInput extends React.Component {
   constructor (props) {
@@ -7,13 +8,16 @@ export default class TyperInput extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.active || nextProps.countdown) {
+    if (this.props.stage !== nextProps.stage &&
+       (nextProps.stage === ACTIVE || nextProps.stage === COUNTDOWN)) {
+      console.log(this.props.stage, nextProps.stage)
+      this.setState({inputValue: ''})
       this.input.focus()
     }
   }
 
   onChange (e) {
-    if (this.props.active) {
+    if (this.props.stage === ACTIVE) {
       if (this.state.inputValue.length < e.target.value.length) {
         this.props.incrementChars()
       }

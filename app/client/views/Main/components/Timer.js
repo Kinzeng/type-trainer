@@ -1,6 +1,15 @@
 import React from 'react'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../constants/typer'
 
+const containerProps = {
+  style: {
+    height: '40px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center'
+  }
+}
+
 export default class Timer extends React.Component {
   constructor (props) {
     super(props)
@@ -20,7 +29,7 @@ export default class Timer extends React.Component {
 
     const timer = setInterval(() => {
       const nextSecond = this.state.seconds - 1
-      if (nextSecond < 1) {
+      if (nextSecond < 0) {
         clearInterval(timer)
         this.start()
       } else {
@@ -80,12 +89,12 @@ export default class Timer extends React.Component {
     }
 
     return (
-      <div>
+      <div {...containerProps}>
         {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
           ? <p style={timerStyle}>{`${this.state.minutes}:${this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds}`}</p>
           : <button {...buttonProps}>Start!</button>
         }
-        <button onClick={this.finish.bind(this)}>Done</button>
+        <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this)}>Done</button>
       </div>
     )
   }

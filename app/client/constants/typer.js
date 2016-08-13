@@ -23,7 +23,7 @@ through and where we're going.`,
   `"Who would even fathom to do such a thing?" she muttered to herself,
 unable to comprehend her boyfriend's utter stupidity. "I mean, glowsticks
 aren't even flammable!"`,
-  `"Hey, I was really drunk and maybe had eaten some cannabis," he responds,
-attempting to defend himself in an utterly unconvincing tone. "Plus fire is
+  `"Hey, I was really drunk and maybe had eaten some cannabis," he responded,
+attempting to defend himself in an entirely unconvincing tone. "Plus fire is
 really cool." The added comment persuaded no one.`
 ]

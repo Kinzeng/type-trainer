@@ -49,8 +49,7 @@ export default class Typer extends React.Component {
     }
 
     const inputProps = {
-      active,
-      countdown,
+      stage: this.props.stage,
       lastWord: this.state.lastWord,
       nextWord: this.state.nextWord,
       getNextWord: this.getNextWord.bind(this),
