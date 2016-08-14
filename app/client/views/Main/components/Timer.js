@@ -1,4 +1,5 @@
 import React from 'react'
+import {displayTime} from '../../../utils'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../constants/typer'
 
 const containerProps = {
@@ -91,7 +92,7 @@ export default class Timer extends React.Component {
     return (
       <div {...containerProps}>
         {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
-          ? <p style={timerStyle}>{`${this.state.minutes}:${this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds}`}</p>
+          ? <p style={timerStyle}>{displayTime(this.state.minutes, this.state.seconds)}</p>
           : <button {...buttonProps}>Start!</button>
         }
         <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this)}>Done</button>

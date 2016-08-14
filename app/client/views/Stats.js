@@ -1,6 +1,18 @@
 import React from 'react'
 import {Link} from 'react-router'
 
+const tableProps = {
+  style: {
+    width: '100%'
+  }
+}
+
+const tdProps = {
+  style: {
+    textAlign: 'center'
+  }
+}
+
 function determineStart (num) {
   if (num <= 10) {
     return 0
@@ -16,45 +28,46 @@ export default class Stats extends React.Component {
   }
 
   componentWillMount () {
-    this.setState({
-      num: parseInt(window.localStorage.getItem('num')),
-      averageWPM: parseFloat(window.localStorage.getItem('averageWPM')),
-      averageAcc: parseFloat(window.localStorage.getItem('averageAcc')),
-      last10WPM: JSON.parse(window.localStorage.getItem('last10WPM')),
-      last10Acc: JSON.parse(window.localStorage.getItem('last10Acc'))
-    })
+    this.setState({stats: JSON.parse(window.localStorage.getItem('stats'))})
+  }
+
+  clearStats () {
+    window.localStorage.removeItem('stats')
+    this.setState({stats: null})
   }
 
   render () {
-    if (!this.state.averageWPM) {
-      return <div>You haven't typed any passages! Click <Link to='/'>here</Link> to type some.</div>
+    if (!this.state.stats) {
+      return <div>You don't have any saved stats! Click <Link to='/'>here</Link> to type a passage.</div>
     }
+
+    const {num, averageWPM, averageAcc, last10WPM, last10Acc} = this.state.stats
 
     const list = []
     let wpmAve = 0
     let accAve = 0
     let count = 0
-    for (let i = determineStart(this.state.num); count < this.state.last10WPM.length; i = (i + 1) % 10) {
-      const wpm = this.state.last10WPM[i]
-      const acc = this.state.last10Acc[i]
+    for (let i = determineStart(num); count < last10WPM.length; i = (i + 1) % 10) {
+      const wpm = last10WPM[i]
+      const acc = last10Acc[i]
 
       wpmAve += wpm
       accAve += acc
       list.push(
         <tr key={i}>
           <td>{count + 1}.</td>
-          <td>{wpm.toFixed(1)}</td>
-          <td>{acc.toFixed(2)}%</td>
+          <td {...tdProps}>{wpm.toFixed(1)}</td>
+          <td {...tdProps}>{acc.toFixed(2)}%</td>
         </tr>
       )
       count++
     }
 
-    wpmAve /= this.state.last10WPM.length
-    accAve /= this.state.last10Acc.length
+    wpmAve /= last10WPM.length
+    accAve /= last10Acc.length
     const last10 = (
       <div>
-        <table>
+        <table {...tableProps}>
           <thead>
             <tr>
               <th />
@@ -76,10 +89,12 @@ export default class Stats extends React.Component {
 
     return (
       <div>
-        Average overall WPM: {this.state.averageWPM.toFixed(1)}<br />
-        Average overall accuracy: {this.state.averageAcc.toFixed(2)}%<br />
+        Average overall WPM: {averageWPM.toFixed(1)}<br />
+        Average overall accuracy: {averageAcc.toFixed(2)}%<br />
         <br />
         {last10}
+        <br />
+        <button onClick={this.clearStats.bind(this)}>Clear Stats</button>
       </div>
     )
   }

@@ -1,6 +1,14 @@
 import {START_COUNTDOWN, START_TYPING, FINISH_TYPING, SET_TEXT} from '../types'
 import {calculateWPM, calculateAccuracy} from '../../../utils'
 
+const initialStats = {
+  num: 0,
+  averageWPM: 0,
+  averageAcc: 0,
+  last10WPM: [],
+  last10Acc: []
+}
+
 export function startCountdown () {
   return {type: START_COUNTDOWN}
 }
@@ -10,29 +18,35 @@ export function startTyping () {
 }
 
 export function finishTyping (text, time, chars) {
+  console.log(JSON.stringify(initialStats, null, 2))
   const wpm = calculateWPM(text, time)
   const accuracy = calculateAccuracy(text, chars)
 
+  // if there is no object stored in localStorage, use initial stats
+
+  // the last10 arrays of initialStats will be modified, but this is
+  // okay because initialStats will only be used once if the user
+  // does not clear the stats
+  // if the user clears stats and then finishes another passage, the
+  // single value stored in initialStats will be overridden
+  const stats = JSON.parse(window.localStorage.getItem('stats')) || {...initialStats}
+  const {num, averageWPM, averageAcc} = stats
+
   // calculate and store new average
-  const num = parseInt(window.localStorage.getItem('num') || 0)
+  const newWPM = ((averageWPM * num) + wpm) / (num + 1)
 
-  const currentWPM = parseFloat(window.localStorage.getItem('averageWPM') || 0)
-  const newWPM = ((currentWPM * num) + wpm) / (num + 1)
+  const newAcc = ((averageAcc * num) + accuracy) / (num + 1)
 
-  const currentAcc = parseFloat(window.localStorage.getItem('averageAcc') || 0)
-  const newAcc = ((currentAcc * num) + accuracy) / (num + 1)
-
-  window.localStorage.setItem('num', num + 1)
-  window.localStorage.setItem('averageWPM', newWPM)
-  window.localStorage.setItem('averageAcc', newAcc)
+  stats.num += 1
+  stats.averageWPM = newWPM
+  stats.averageAcc = newAcc
 
   // store stats into correct "last 10" spot
-  const last10WPM = JSON.parse(window.localStorage.getItem('last10WPM')) || []
-  const last10Acc = JSON.parse(window.localStorage.getItem('last10Acc')) || []
-  last10WPM[num % 10] = wpm
-  last10Acc[num % 10] = accuracy
-  window.localStorage.setItem('last10WPM', JSON.stringify(last10WPM))
-  window.localStorage.setItem('last10Acc', JSON.stringify(last10Acc))
+  stats.last10WPM[num % 10] = wpm
+  stats.last10Acc[num % 10] = accuracy
+
+  window.localStorage.setItem('stats', JSON.stringify(stats))
+  console.log(JSON.stringify(initialStats, null, 2))
 
   return {type: FINISH_TYPING, time, chars, wpm, accuracy: `${accuracy}%`}
 }

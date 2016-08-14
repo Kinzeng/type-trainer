@@ -1,3 +1,7 @@
+export function displayTime (minutes, seconds) {
+  return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
+}
+
 export function calculateWPM (text, time) {
   return parseFloat(((text.length / 5) / (time / 6000)).toFixed(1))
 }
