@@ -1,11 +1,11 @@
 import React from 'react'
 import {displayTime} from '../../../utils'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../constants/typer'
-import {red, green} from '../../../colors'
+import {red, green, orange} from '../../../colors'
 
 const containerProps = {
   style: {
-    height: '40px',
+    marginBottom: '24px',
     display: 'flex',
     justifyContent: 'center',
     alignContent: 'center'
@@ -97,10 +97,11 @@ export default class Timer extends React.Component {
       margin: '0px'
     }
 
-    const buttonProps = {
+    const startProps = {
       onClick: this.startCountdown.bind(this),
       style: {
-        fontSize: '0.8em'
+        color: orange(),
+        cursor: 'pointer'
       }
     }
 
@@ -109,7 +110,7 @@ export default class Timer extends React.Component {
         <div style={timerStyle}>
           {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
             ? <p style={textStyle}>{displayTime(this.state.minutes, this.state.seconds)}</p>
-            : <button {...buttonProps}>Start!</button>
+            : <div {...startProps}>Start!</div>
           }
         </div>
         <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this, true)}>

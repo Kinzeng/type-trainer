@@ -3,7 +3,7 @@ export function background (alpha = 1) {
 }
 
 export function cardBackground (alpha = 1) {
-  return `rgba(78, 103, 115, ${alpha})`
+  return `rgba(78, 95, 115, ${alpha})`
 }
 
 export function shadow (alpha = 1) {
@@ -28,4 +28,8 @@ export function green (alpha = 1) {
 
 export function red (alpha = 1) {
   return `rgba(255, 125, 125, ${alpha})`
+}
+
+export function orange (alpha = 1) {
+  return `rgba(255, 174, 49, ${alpha})`
 }

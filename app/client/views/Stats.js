@@ -1,6 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router'
 import BoxShadow from '../containers/BoxShadow'
+import {orange} from '../colors'
+
+const boxProps = {
+  containerStyle: {
+    marginTop: '40px'
+  }
+}
+
+const linkProps = {
+  to: '/',
+  style: {
+    color: orange()
+  }
+}
 
 const tableProps = {
   style: {
@@ -39,7 +53,11 @@ export default class Stats extends React.Component {
 
   render () {
     if (!this.state.stats) {
-      return <div>You don't have any saved stats! Click <Link to='/'>here</Link> to type a passage.</div>
+      return (
+        <BoxShadow {...boxProps}>
+          You don't have any saved stats! Click <Link {...linkProps}>here</Link> to type a passage.
+        </BoxShadow>
+      )
     }
 
     const {num, averageWPM, averageAcc, last10WPM, last10Acc} = this.state.stats
@@ -89,7 +107,7 @@ export default class Stats extends React.Component {
     )
 
     return (
-      <BoxShadow containerStyle={{marginTop: '40px'}}>
+      <BoxShadow {...boxProps}>
         Average overall WPM: {averageWPM.toFixed(1)}<br />
         Average overall accuracy: {averageAcc.toFixed(2)}%<br />
         <br />

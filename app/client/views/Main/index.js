@@ -11,6 +11,8 @@ import {DONE} from '../../constants/typer'
 const mainProps = {
   containerStyle: {
     width: '50%',
+    minWidth: '500px',
+    maxWidth: '800px',
     marginTop: '100px'
   },
   contentStyle: {

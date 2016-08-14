@@ -9,7 +9,7 @@ const textProps = {
     justifyContent: 'flex-start',
     alignContent: 'flex-start',
     alignItems: 'flex-start',
-    fontSize: '18px'
+    fontSize: '1.5em'
   }
 }
 
@@ -19,6 +19,7 @@ export default class TyperText extends React.Component {
     const text = textArray.map((word, index) => {
       let style = {
         marginRight: '5px',
+        marginTop: '0px',
         color: !this.props.done && index === this.props.currentIndex ? green() : white()
       }
 
