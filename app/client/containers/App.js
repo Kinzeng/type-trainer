@@ -1,4 +1,5 @@
 import React from 'react'
+import {background} from '../colors'
 
 const appProps = {
   style: {
@@ -8,7 +9,7 @@ const appProps = {
     flexFlow: 'column nowrap',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0)',
+    backgroundColor: background(),
     fontFamily: 'sans-serif'
   }
 }

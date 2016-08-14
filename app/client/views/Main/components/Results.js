@@ -8,6 +8,14 @@ const statsProps = {
 
 export default class Results extends React.Component {
   render () {
-    return <div {...statsProps}>{`WPM: ${this.props.wpm} Accuracy: ${this.props.accuracy}`}</div>
+    if (this.props.wpm && this.props.accuracy) {
+      return <div {...statsProps}>{`WPM: ${this.props.wpm} Accuracy: ${this.props.accuracy}`}</div>
+    } else {
+      return (
+        <div {...statsProps}>
+          You ran out of time or left the page, so your stats weren't saved
+        </div>
+      )
+    }
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import BoxShadow from '../../containers/BoxShadow'
 import Timer from './components/Timer'
 import Typer from './components/Typer'
 import Results from './components/Results'
@@ -8,12 +9,15 @@ import {startCountdown, startTyping, finishTyping, setText} from '../../redux/ac
 import {DONE} from '../../constants/typer'
 
 const mainProps = {
-  style: {
+  containerStyle: {
+    width: '50%',
+    marginTop: '100px'
+  },
+  contentStyle: {
     display: 'flex',
     flexFlow: 'column nowrap',
     justifyContent: 'center',
-    alignItems: 'center',
-    width: '50%'
+    alignItems: 'center'
   }
 }
 
@@ -40,8 +44,8 @@ class Main extends React.Component {
     return false
   }
 
-  finishTyping () {
-    this.props.finishTyping(this.props.text, this.state.time, this.state.chars + 1)
+  finishTyping (saveStats) {
+    this.props.finishTyping(this.props.text, this.state.time, this.state.chars + 1, saveStats)
     this.setState({time: 0, chars: 0})
   }
 
@@ -76,13 +80,13 @@ class Main extends React.Component {
     }
 
     return (
-      <div {...mainProps}>
+      <BoxShadow {...mainProps}>
         <Timer {...timerProps} />
         <Typer {...typerProps} />
         {this.props.stage === DONE &&
           <Results {...statsProps} />
         }
-      </div>
+      </BoxShadow>
     )
   }
 }

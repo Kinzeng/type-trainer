@@ -1,4 +1,5 @@
 import React from 'react'
+import {white, green} from '../../../../colors'
 
 const textProps = {
   style: {
@@ -12,13 +13,13 @@ const textProps = {
   }
 }
 
-export default class TextBlock extends React.Component {
+export default class TyperText extends React.Component {
   render () {
     const textArray = this.props.text.split(' ')
     const text = textArray.map((word, index) => {
       let style = {
         marginRight: '5px',
-        color: !this.props.done && index === this.props.currentIndex ? 'green' : 'black'
+        color: !this.props.done && index === this.props.currentIndex ? green() : white()
       }
 
       return <p key={index} style={style}>{word}</p>

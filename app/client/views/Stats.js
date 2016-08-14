@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
+import BoxShadow from '../containers/BoxShadow'
 
 const tableProps = {
   style: {
@@ -88,14 +89,14 @@ export default class Stats extends React.Component {
     )
 
     return (
-      <div>
+      <BoxShadow containerStyle={{marginTop: '40px'}}>
         Average overall WPM: {averageWPM.toFixed(1)}<br />
         Average overall accuracy: {averageAcc.toFixed(2)}%<br />
         <br />
         {last10}
         <br />
         <button onClick={this.clearStats.bind(this)}>Clear Stats</button>
-      </div>
+      </BoxShadow>
     )
   }
 }

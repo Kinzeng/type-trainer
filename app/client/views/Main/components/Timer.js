@@ -1,6 +1,7 @@
 import React from 'react'
 import {displayTime} from '../../../utils'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../constants/typer'
+import {red, green} from '../../../colors'
 
 const containerProps = {
   style: {
@@ -24,6 +25,12 @@ export default class Timer extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    if (this.props.stage === ACTIVE || this.props.stage === COUNTDOWN) {
+      this.finish()
+    }
+  }
+
   startCountdown () {
     this.setState({minutes: 0, seconds: 3})
     this.props.startCountdown()
@@ -37,6 +44,8 @@ export default class Timer extends React.Component {
         this.setState({seconds: nextSecond})
       }
     }, 1000)
+
+    this.setState({timer})
   }
 
   start () {
@@ -74,28 +83,38 @@ export default class Timer extends React.Component {
     clearInterval(this.state.timer)
     clearInterval(this.state.preciseTimer)
     this.setState({timer: null})
-    this.props.finishTyping()
+    this.props.finishTyping(false)
   }
 
   render () {
-    let timerStyle = {
-      color: this.props.stage === ACTIVE ? 'green' : 'red'
+    const timerStyle = {
+      color: this.props.stage === ACTIVE ? green() : red(),
+      fontSize: '1.5em',
+      margin: 'none'
+    }
+
+    const textStyle = {
+      margin: '0px'
     }
 
     const buttonProps = {
       onClick: this.startCountdown.bind(this),
       style: {
-        fontSize: '18px'
+        fontSize: '0.8em'
       }
     }
 
     return (
       <div {...containerProps}>
-        {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
-          ? <p style={timerStyle}>{displayTime(this.state.minutes, this.state.seconds)}</p>
-          : <button {...buttonProps}>Start!</button>
-        }
-        <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this)}>Done</button>
+        <div style={timerStyle}>
+          {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
+            ? <p style={textStyle}>{displayTime(this.state.minutes, this.state.seconds)}</p>
+            : <button {...buttonProps}>Start!</button>
+          }
+        </div>
+        <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this, true)}>
+          Done
+        </button>
       </div>
     )
   }

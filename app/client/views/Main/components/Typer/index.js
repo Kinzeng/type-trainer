@@ -16,7 +16,7 @@ const typerProps = {
 export default class Typer extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {text: '', currentIndex: 0, textArray: [], nextWord: '', lastWord: false}
+    this.state = {text: props.text || '', currentIndex: 0, textArray: [], nextWord: '', lastWord: false}
   }
 
   componentWillMount () {

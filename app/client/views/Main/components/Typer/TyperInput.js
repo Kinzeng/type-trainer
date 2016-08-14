@@ -1,5 +1,6 @@
 import React from 'react'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../../constants/typer'
+import {red, inputBackground, white, black, shadow} from '../../../../colors'
 
 export default class TyperInput extends React.Component {
   constructor (props) {
@@ -23,7 +24,7 @@ export default class TyperInput extends React.Component {
 
       if (this.props.lastWord && e.target.value === this.props.nextWord) {
         this.setState({inputValue: ''})
-        this.props.finishTyping()
+        this.props.finishTyping(true)
       } else if (e.target.value === this.props.nextWord + ' ') {
         this.setState({inputValue: ''})
         this.props.getNextWord()
@@ -35,7 +36,8 @@ export default class TyperInput extends React.Component {
 
   render () {
     const correct = (this.props.nextWord + ' ').startsWith(this.state.inputValue)
-    const backgroundColor = correct ? 'white' : 'rgb(255,125,125)'
+    const backgroundColor = inputBackground()
+    const color = correct ? white() : red()
 
     const inputProps = {
       value: this.state.inputValue,
@@ -44,8 +46,13 @@ export default class TyperInput extends React.Component {
       ref: (ref) => { this.input = ref },
       style: {
         width: '100%',
+        color,
         backgroundColor,
-        fontSize: '18px'
+        fontSize: '2em',
+        outline: 'none',
+        border: 'none',
+        padding: '4px',
+        boxShadow: `inset 0px 0px 10px 4px ${shadow(0.5)}`
       },
       disabled: this.props.stage === DONE
     }
