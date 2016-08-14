@@ -26,6 +26,14 @@ export function finishTyping (text, time, chars) {
   window.localStorage.setItem('averageWPM', newWPM)
   window.localStorage.setItem('averageAcc', newAcc)
 
+  // store stats into correct "last 10" spot
+  const last10WPM = JSON.parse(window.localStorage.getItem('last10WPM')) || []
+  const last10Acc = JSON.parse(window.localStorage.getItem('last10Acc')) || []
+  last10WPM[num % 10] = wpm
+  last10Acc[num % 10] = accuracy
+  window.localStorage.setItem('last10WPM', JSON.stringify(last10WPM))
+  window.localStorage.setItem('last10Acc', JSON.stringify(last10Acc))
+
   return {type: FINISH_TYPING, time, chars, wpm, accuracy: `${accuracy}%`}
 }
 
