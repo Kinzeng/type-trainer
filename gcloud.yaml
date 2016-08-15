@@ -3,4 +3,3 @@ vm: true
 
 skip_files:
  - ^node_modules$
- 

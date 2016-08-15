@@ -119,9 +119,11 @@ export default class Timer extends React.Component {
             : <div {...startProps}>Start!</div>
           }
         </div>
+        {/*
         <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this, true)}>
           Done
         </button>
+        */}
       </div>
     )
   }
