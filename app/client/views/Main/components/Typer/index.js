@@ -2,7 +2,7 @@ import React from 'react'
 import TyperText from './TyperText'
 import TyperInput from './TyperInput'
 import {randomInt} from '../../../../utils'
-import {passages, COUNTDOWN, ACTIVE, DONE} from '../../../../constants/typer'
+import {passages, COUNTDOWN, ACTIVE, DONE, SAGA_LENGTH} from '../../../../constants/typer'
 
 const typerProps = {
   style: {
@@ -40,15 +40,11 @@ export default class Typer extends React.Component {
 
     let index = randomInt(0, passages.length)
 
-    if (index >= 0 && index <= 7) { // if a saga passage is chosen
-      if (sagaProgress < 7) { // select the next saga passage
+    if (index < SAGA_LENGTH) { // if a saga passage is chosen
+      if (sagaProgress < SAGA_LENGTH - 1) { // select the next saga passage if the user hasn't finished the saga
         index = sagaProgress + 1
-      } else { // 10% chance to type a saga passage again, otherwise choose a different one
-        const chance = Math.random()
-        console.log(chance)
-        if (chance > 0.5) {
-          index = randomInt(8, passages.length)
-        }
+      } else if (Math.random() > 0.5) { // make the saga text less likely to appear after they've completed it
+        index = randomInt(SAGA_LENGTH, passages.length)
       }
     }
 

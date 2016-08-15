@@ -1,5 +1,6 @@
 import {START_COUNTDOWN, START_TYPING, FINISH_TYPING, SET_TEXT} from '../types'
 import {calculateWPM, calculateAccuracy} from '../../../utils'
+import {SAGA_LENGTH} from '../../../constants/typer'
 
 const initialStats = {
   num: 0,
@@ -52,7 +53,7 @@ export function finishTyping (text, time, chars, saveStats, textIndex) {
     stats.last10Acc[num % 10] = accuracy
 
     // check sagaProgress
-    if (textIndex >= 0 && textIndex <= 7) {
+    if (textIndex >= 0 && textIndex < SAGA_LENGTH) {
       stats.sagaProgress = Math.max(sagaProgress, textIndex)
     }
 

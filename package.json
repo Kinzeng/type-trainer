@@ -10,7 +10,8 @@
     "start": "npm run build && node bin",
     "monitor": "nodemon --ignore app/public/ --ignore app/client/ bin",
     "dev": "webpack -d --watch --progress & npm run monitor",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "deploy": "gcloud preview gcloud deploy"
   },
   "dependencies": {
     "babel-cli": "^6.11.4",
