@@ -52,8 +52,8 @@ export default class Welcome extends React.Component {
           for your last ten passages, and your personal record.
           <br /><br />
             Right now there is one series of passages that tell a story along with
-          other random things that don't really mean anything. I'll try to add more
-          passages as soon as possible, but in the meantime,&nbsp;enjoy!
+          other random passages that don't really mean anything. I'll try to add
+          more passages as soon as possible, but in the meantime,&nbsp;enjoy!
           <br /><br />
           Click <span {...spanProps}>here</span> to start!
         </p>

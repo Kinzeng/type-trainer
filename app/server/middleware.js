@@ -3,6 +3,7 @@ import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
+import config from '../../config'
 
 morgan.format('custom', function developmentFormatLine (tokens, req, res) {
   var status = res._header
@@ -29,7 +30,9 @@ export default (app) => {
   app.use(express.static(path.join(__dirname, '..', 'public')))
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
-  app.use(morgan('custom'))
+  if (config.env !== 'production') {
+    app.use(morgan('custom'))
+  }
 
   app.set('views', 'app/client/views')
   app.set('view engine', 'ejs')

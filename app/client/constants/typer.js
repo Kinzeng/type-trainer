@@ -3,15 +3,17 @@ export const COUNTDOWN = 'countdown'
 export const ACTIVE = 'active'
 export const DONE = 'done'
 
-export const SAGA_LENGTH = 15
+export const SAGA_LENGTH = 16
 
 export const passages = [
   `A boy just graduated 5th grade, about to go into middle school, so his dad
 decided that he deserved some kind of gift. He asked him, "Son, I think you've
 done a great job this year, so I'll give you one gift. What do you want, my
-boy?" The boy thought for a bit, and said, "Dad, I want a red toothpick." The
-dad was confused by such a silly gift, but decided not to ask any questions and
-got him a red toothpick.`,
+boy?"`,
+
+  `The boy thought for a bit, and said, "Dad, I want a red toothpick." The dad
+was confused by such a silly gift, but decided not to ask any questions and got
+him a red toothpick.`,
 
   `A few years later, the boy graduated 8th grade, going into high school. The
 dad once again thought that he should give his son a gift, and so he asked,

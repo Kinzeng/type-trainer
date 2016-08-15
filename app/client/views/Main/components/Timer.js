@@ -116,14 +116,14 @@ export default class Timer extends React.Component {
         <div style={timerStyle}>
           {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
             ? <p style={textStyle}>{displayTime(this.state.minutes, this.state.seconds)}</p>
-            : <div {...startProps}>Start!</div>
+            : <div {...startProps}>Another one!</div>
           }
         </div>
-        {/*
-        <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this, true)}>
-          Done
-        </button>
-        */}
+        {process.env.NODE_ENV !== 'production' &&
+          <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this, true)}>
+            Done
+          </button>
+        }
       </div>
     )
   }
