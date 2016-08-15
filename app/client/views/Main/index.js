@@ -14,8 +14,7 @@ const mainProps = {
     alignSelf: 'center',
     width: '50%',
     minWidth: '500px',
-    maxWidth: '800px',
-    marginTop: '-40px'
+    maxWidth: '800px'
   },
   contentStyle: {}
 }
@@ -52,8 +51,8 @@ class Main extends React.Component {
     return false
   }
 
-  finishTyping (saveStats) {
-    this.props.finishTyping(this.props.text, this.state.time, this.state.chars + 1, saveStats)
+  finishTyping (saveStats, textIndex) {
+    this.props.finishTyping(this.props.text, this.state.time, this.state.chars + 1, saveStats, textIndex)
     this.setState({time: 0, chars: 0})
   }
 

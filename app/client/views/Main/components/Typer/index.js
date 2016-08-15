@@ -1,6 +1,7 @@
 import React from 'react'
 import TyperText from './TyperText'
 import TyperInput from './TyperInput'
+import {randomInt} from '../../../../utils'
 import {passages, COUNTDOWN, ACTIVE, DONE} from '../../../../constants/typer'
 
 const typerProps = {
@@ -34,10 +35,26 @@ export default class Typer extends React.Component {
   }
 
   selectText () {
-    const index = Math.floor(Math.random() * passages.length)
+    const stats = JSON.parse(window.localStorage.getItem('stats')) || {sagaProgress: -1}
+    const {sagaProgress} = stats
+
+    let index = randomInt(0, passages.length)
+
+    if (index >= 0 && index <= 7) { // if a saga passage is chosen
+      if (sagaProgress < 7) { // select the next saga passage
+        index = sagaProgress + 1
+      } else { // 10% chance to type a saga passage again, otherwise choose a different one
+        const chance = Math.random()
+        console.log(chance)
+        if (chance > 0.5) {
+          index = randomInt(8, passages.length)
+        }
+      }
+    }
+
     const text = passages[index].replace(/\r?\n|\r/g, ' ')
     const textArray = text.split(' ')
-    this.setState({text, textArray, nextWord: textArray[0], lastWord: false, currentIndex: 0})
+    this.setState({text, textArray, textIndex: index, nextWord: textArray[0], lastWord: false, currentIndex: 0})
     this.props.setText(text)
   }
 
@@ -62,6 +79,7 @@ export default class Typer extends React.Component {
 
     const inputProps = {
       stage: this.props.stage,
+      textIndex: this.state.textIndex,
       lastWord: this.state.lastWord,
       nextWord: this.state.nextWord,
       getNextWord: this.getNextWord.bind(this),

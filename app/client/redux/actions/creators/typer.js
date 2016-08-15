@@ -7,7 +7,8 @@ const initialStats = {
   averageAcc: 0,
   personalRecord: 0,
   last10WPM: [],
-  last10Acc: []
+  last10Acc: [],
+  sagaProgress: -1
 }
 
 export function startCountdown () {
@@ -18,7 +19,7 @@ export function startTyping () {
   return {type: START_TYPING}
 }
 
-export function finishTyping (text, time, chars, saveStats) {
+export function finishTyping (text, time, chars, saveStats, textIndex) {
   if (saveStats) {
     const wpm = calculateWPM(text, time)
     const accuracy = calculateAccuracy(text, chars)
@@ -31,7 +32,7 @@ export function finishTyping (text, time, chars, saveStats) {
     // if the user clears stats and then finishes another passage, the
     // single value stored in initialStats will be overridden
     const stats = JSON.parse(window.localStorage.getItem('stats')) || {...initialStats}
-    const {num, averageWPM, averageAcc, personalRecord} = stats
+    const {num, averageWPM, averageAcc, personalRecord, sagaProgress} = stats
 
     // calculate and store new averages
     const newWPM = ((averageWPM * num) + wpm) / (num + 1)
@@ -49,6 +50,11 @@ export function finishTyping (text, time, chars, saveStats) {
     // store stats into correct "last 10" spot
     stats.last10WPM[num % 10] = wpm
     stats.last10Acc[num % 10] = accuracy
+
+    // check sagaProgress
+    if (textIndex >= 0 && textIndex <= 7) {
+      stats.sagaProgress = Math.max(sagaProgress, textIndex)
+    }
 
     window.localStorage.setItem('stats', JSON.stringify(stats))
     return {type: FINISH_TYPING, time, chars, wpm, accuracy: `${accuracy}%`}

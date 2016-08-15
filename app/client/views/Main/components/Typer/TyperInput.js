@@ -24,7 +24,7 @@ export default class TyperInput extends React.Component {
 
       if (this.props.lastWord && e.target.value === this.props.nextWord) {
         this.setState({inputValue: ''})
-        this.props.finishTyping(true)
+        this.props.finishTyping(true, this.props.textIndex)
       } else if (e.target.value === this.props.nextWord + ' ') {
         this.setState({inputValue: ''})
         this.props.getNextWord()

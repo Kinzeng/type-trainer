@@ -22,8 +22,9 @@ const signatures = [
   'Created by one of the ten million Kevin Zhangs',
   'Created by Kevin Zhang #1028392',
   'Created by probably the fifth Kevin Zhang you know',
-  'Created by Kevin Zhang (ugh not another one)',
-  'Created by Kevin Zhang. Not that one, the other one.'
+  'Created by Kevin Zhang (ugh, not another Kevin Zhang)',
+  'Created by Kevin Zhang. Not that Kevin Zhang, the other Kevin Zhang.',
+  'Created by Kevin Zhang (there are quite a few of us, ya know)'
 ]
 
 export default class Welcome extends React.Component {

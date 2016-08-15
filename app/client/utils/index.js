@@ -9,3 +9,7 @@ export function calculateWPM (text, time) {
 export function calculateAccuracy (text, chars) {
   return parseFloat(((text.length / chars) * 100).toFixed(2))
 }
+
+export function randomInt (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min
+}
