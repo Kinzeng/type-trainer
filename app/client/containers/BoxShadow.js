@@ -25,6 +25,12 @@ export default class BoxShadow extends React.Component {
       ...this.props.contentStyle
     }
 
-    return <div style={containerStyle}><div style={contentStyle}>{this.props.children}</div></div>
+    return (
+      <div style={containerStyle}>
+        <div style={contentStyle}>
+          {this.props.children}
+        </div>
+      </div>
+    )
   }
 }

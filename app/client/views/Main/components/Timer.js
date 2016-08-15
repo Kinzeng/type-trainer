@@ -15,7 +15,7 @@ const containerProps = {
 export default class Timer extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {minutes: 1, seconds: 0, timer: null}
+    this.state = {minutes: 3, seconds: 0, timer: null}
   }
 
   componentWillReceiveProps (nextProps) {
@@ -55,7 +55,7 @@ export default class Timer extends React.Component {
   }
 
   start () {
-    this.setState({minutes: 1, seconds: 0})
+    this.setState({minutes: 3, seconds: 0})
     // start a timer to display seconds
     const timer = setInterval(this.tick.bind(this), 1000)
     // start another timer that is used to calculate WPM.

@@ -5,7 +5,7 @@ export const DONE = 'done'
 
 export const passages = [
   `You know, we've never really hung out before. Maybe we should try it.
-  Just once.`,
+Just once.`,
 
   `Sometimes I wonder if what I'm doing at the moment is really what I'm
 "supposed" to do. But then I forget about that thought and keep doing it
@@ -24,32 +24,32 @@ responded, attempting to defend himself.`,
 forcing you to gasp what little air you can get until you finally suffocate
 from loneliness? Yeah, me neither.`,
 
-  `A boy just graduated 5th grade, about to go into middle school, so his
-dad decided that he deserved some kind of gift. He asks him, "Son, I think
-you've done a great job this year, so I'll give you one gift. What do
-you want, my boy?" The boy thought for a bit, and said, "Dad, I want a red
-toothpick." The dad was confused by such a silly gift, but decided not
-to ask any questions and got him a red toothpick.`,
+  `A boy just graduated 5th grade, about to go into middle school, so his dad
+decided that he deserved some kind of gift. He asks him, "Son, I think you've
+done a great job this year, so I'll give you one gift. What do you want, my
+boy?" The boy thought for a bit, and said, "Dad, I want a red toothpick." The
+dad was confused by such a silly gift, but decided not to ask any questions and
+got him a red toothpick.`,
 
   `A few years later, the boy is graduating 8th grade now, going into high
-school. The dad once again thought that he should give his son a gift, and
-so he asks, "Lad, you've been a really great boy these past few years, so
-I'm going to give you another gift. What do you want, son?" The child thought
-for a bit, and said, "Dad, you know what I really want? A orange toothpick. that
-is all I want." The dad, again confused, wanted to ask why, but decided to
-leave him alone. He went to the store and bought his son a orange toothpick.`,
+school. The dad once again thought that he should give his son a gift, and so he
+asks, "Lad, you've been a really great boy these past few years, so I'm going to
+give you another gift. What do you want, son?" The child thought for a bit, and
+said, "Dad, you know what I really want? An orange toothpick. That is all I
+want." The dad, again confused, wanted to ask why, but decided to leave him
+alone. He went to the store and bought his son an orange toothpick.`,
 
   `Another four years pass and the son is graduating high school now. The dad,
 very proud of his son, wanted to give him another gift. He says to his son,
-"Son, you have made me very proud. I'm going to give you another gift. What
-do you want, lad?" The boy tilted his head down in thought, and finally said,
-"Dad, all I want for my graduation is two yellow toothpicks. Nothing more."
-Dad, still perplexed by his son's query, could not hold in his curiousity
-any longer. "Son, why do you keep asking for toothpicks? I have to know." The
-son smiled at his dad and said, "It's a secret, dad."`,
+"Son, you have made me very proud. I'm going to give you another gift. What do
+you want, lad?" The boy tilted his head down in thought, and finally said, "Dad,
+all I want for my graduation is two yellow toothpicks. Nothing more." Dad, still
+perplexed by his son's query, could not hold in his curiousity any longer. "Son,
+why do you keep asking for toothpicks? I have to know." The son smiled at his
+dad and said, "It's a secret, dad."`,
 
   `Once again the son graduated, but this time he graduated college. He found
-his dad after the ceremony and his dad greeted with with a great big hug. "Son!
+his dad after the ceremony and his dad greeted him with a great big hug. "Son!
 You have a college degree now! I want to give you another gift. What would you 
 like, my boy?" The son looked down at his diploma and back up at his dad. "Dad,
 all I want right now is three green toothpicks." The dad, once again, asks his
