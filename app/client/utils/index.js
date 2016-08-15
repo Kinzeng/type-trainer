@@ -3,7 +3,7 @@ export function displayTime (minutes, seconds) {
 }
 
 export function calculateWPM (text, time) {
-  return parseFloat(((text.length / 5) / (time / 6000)).toFixed(1))
+  return parseFloat(((text.length / 5) / (time / 12000)).toFixed(1))
 }
 
 export function calculateAccuracy (text, chars) {

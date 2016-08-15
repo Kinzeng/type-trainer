@@ -26,9 +26,7 @@ export default class Timer extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.stage !== DONE) {
-      this.startCountdown()
-    }
+    this.startCountdown()
   }
 
   componentWillUnmount () {
@@ -61,7 +59,7 @@ export default class Timer extends React.Component {
     // start another timer that is used to calculate WPM.
     // a tick needs to be much faster than a second so that
     // WPM is more accurate
-    const preciseTimer = setInterval(this.preciseTick.bind(this), 10)
+    const preciseTimer = setInterval(this.props.incrementTime, 5)
     this.setState({timer, preciseTimer})
     this.props.startTyping()
   }

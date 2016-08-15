@@ -21,11 +21,7 @@ export default class Typer extends React.Component {
   }
 
   componentWillMount () {
-    if (this.props.text) {
-      this.setState({text: this.props.text})
-    } else {
-      this.selectText()
-    }
+    this.selectText()
   }
 
   componentWillReceiveProps (nextProps) {
