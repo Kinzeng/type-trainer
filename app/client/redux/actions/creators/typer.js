@@ -5,6 +5,7 @@ const initialStats = {
   num: 0,
   averageWPM: 0,
   averageAcc: 0,
+  personalRecord: 0,
   last10WPM: [],
   last10Acc: []
 }
@@ -30,7 +31,7 @@ export function finishTyping (text, time, chars, saveStats) {
     // if the user clears stats and then finishes another passage, the
     // single value stored in initialStats will be overridden
     const stats = JSON.parse(window.localStorage.getItem('stats')) || {...initialStats}
-    const {num, averageWPM, averageAcc} = stats
+    const {num, averageWPM, averageAcc, personalRecord} = stats
 
     // calculate and store new averages
     const newWPM = ((averageWPM * num) + wpm) / (num + 1)
@@ -39,6 +40,11 @@ export function finishTyping (text, time, chars, saveStats) {
     stats.num += 1
     stats.averageWPM = newWPM
     stats.averageAcc = newAcc
+
+    // update personal record
+    if (wpm > personalRecord) {
+      stats.personalRecord = wpm
+    }
 
     // store stats into correct "last 10" spot
     stats.last10WPM[num % 10] = wpm

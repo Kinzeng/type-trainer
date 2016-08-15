@@ -33,3 +33,7 @@ export function red (alpha = 1) {
 export function orange (alpha = 1) {
   return `rgba(255, 174, 49, ${alpha})`
 }
+
+export function blue (alpha = 1) {
+  return `rgba(125, 255, 255, ${alpha})`
+}

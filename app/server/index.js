@@ -9,7 +9,6 @@ app.all('*', (req, res) => {
 })
 
 app.use((err, req, res, next) => {
-  console.log('  Error: ' + err.status + ': ' + err.message)
   return res.json({
     error: err.status,
     message: err.message

@@ -25,6 +25,12 @@ export default class Timer extends React.Component {
     }
   }
 
+  componentWillMount () {
+    if (this.props.stage !== DONE) {
+      this.startCountdown()
+    }
+  }
+
   componentWillUnmount () {
     if (this.props.stage === ACTIVE || this.props.stage === COUNTDOWN) {
       this.finish()

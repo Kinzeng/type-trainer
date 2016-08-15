@@ -36,7 +36,6 @@ export default class TyperInput extends React.Component {
 
   render () {
     const correct = (this.props.nextWord + ' ').startsWith(this.state.inputValue)
-    const backgroundColor = inputBackground()
     const color = correct ? white() : red()
 
     const inputProps = {
@@ -47,7 +46,7 @@ export default class TyperInput extends React.Component {
       style: {
         width: '100%',
         color,
-        backgroundColor,
+        backgroundColor: inputBackground(),
         fontSize: '2em',
         outline: 'none',
         border: 'none',

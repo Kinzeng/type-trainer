@@ -2,20 +2,26 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import BoxShadow from '../../containers/BoxShadow'
+import Welcome from './components/Welcome'
 import Timer from './components/Timer'
 import Typer from './components/Typer'
 import Results from './components/Results'
 import {startCountdown, startTyping, finishTyping, setText} from '../../redux/actions/creators/typer'
-import {DONE} from '../../constants/typer'
+import {INIT, DONE} from '../../constants/typer'
 
 const mainProps = {
   containerStyle: {
+    alignSelf: 'center',
     width: '50%',
     minWidth: '500px',
     maxWidth: '800px',
-    marginTop: '100px'
+    marginTop: '-40px'
   },
-  contentStyle: {
+  contentStyle: {}
+}
+
+const viewProps = {
+  style: {
     display: 'flex',
     flexFlow: 'column nowrap',
     justifyContent: 'center',
@@ -60,6 +66,10 @@ class Main extends React.Component {
   }
 
   render () {
+    const welcomeProps = {
+      startCountdown: this.props.startCountdown
+    }
+
     const timerProps = {
       stage: this.props.stage,
       startCountdown: this.props.startCountdown,
@@ -81,13 +91,24 @@ class Main extends React.Component {
       accuracy: this.props.accuracy
     }
 
+    let view
+    if (this.props.stage === INIT) {
+      view = <Welcome {...welcomeProps} />
+    } else {
+      view = (
+        <div {...viewProps}>
+          <Timer {...timerProps} />
+          <Typer {...typerProps} />
+          {this.props.stage === DONE &&
+            <Results {...statsProps} />
+          }
+        </div>
+      )
+    }
+
     return (
       <BoxShadow {...mainProps}>
-        <Timer {...timerProps} />
-        <Typer {...typerProps} />
-        {this.props.stage === DONE &&
-          <Results {...statsProps} />
-        }
+        {view}
       </BoxShadow>
     )
   }

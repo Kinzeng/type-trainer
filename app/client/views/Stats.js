@@ -1,17 +1,23 @@
 import React from 'react'
 import {Link} from 'react-router'
 import BoxShadow from '../containers/BoxShadow'
-import {orange} from '../colors'
+import {red, orange} from '../colors'
 
 const boxProps = {
   containerStyle: {
-    marginTop: '40px'
+    // marginTop: '40px'
+  },
+  contentStyle: {
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    alignItems: 'center'
   }
 }
 
 const linkProps = {
   to: '/',
   style: {
+    textDecoration: 'none',
     color: orange()
   }
 }
@@ -39,7 +45,7 @@ function determineStart (num) {
 export default class Stats extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {confirmed: false}
   }
 
   componentWillMount () {
@@ -47,20 +53,32 @@ export default class Stats extends React.Component {
   }
 
   clearStats () {
-    window.localStorage.removeItem('stats')
-    this.setState({stats: null})
+    if (!this.state.confirmed) {
+      this.setState({confirmed: true})
+    } else {
+      window.localStorage.removeItem('stats')
+      this.setState({stats: null, confirmed: false})
+    }
   }
 
   render () {
     if (!this.state.stats) {
       return (
-        <BoxShadow {...boxProps}>
+        <BoxShadow containerStyle={boxProps.containerStyle}>
           You don't have any saved stats! Click <Link {...linkProps}>here</Link> to type a passage.
         </BoxShadow>
       )
     }
 
-    const {num, averageWPM, averageAcc, last10WPM, last10Acc} = this.state.stats
+    const clearStatsProps = {
+      onClick: this.clearStats.bind(this),
+      style: {
+        color: red(),
+        cursor: 'pointer'
+      }
+    }
+
+    const {num, averageWPM, averageAcc, personalRecord, last10WPM, last10Acc} = this.state.stats
 
     const list = []
     let wpmAve = 0
@@ -98,22 +116,35 @@ export default class Stats extends React.Component {
             {list}
           </tbody>
         </table>
-        <div key='averages'>
-          <br />
-          Average last 10 WPM: {wpmAve.toFixed(1)}<br />
-          Average last 10 accuracy: {accAve.toFixed(2)}%
-        </div>
+        <br />
+        <table {...tableProps}>
+          <tbody>
+            <tr><td>Average speed:</td><td>{wpmAve.toFixed(1)} WPM</td></tr>
+            <tr><td>Average accuracy:</td><td>{accAve.toFixed(2)}%</td></tr>
+          </tbody>
+        </table>
       </div>
     )
 
     return (
       <BoxShadow {...boxProps}>
-        Average overall WPM: {averageWPM.toFixed(1)}<br />
-        Average overall accuracy: {averageAcc.toFixed(2)}%<br />
+        <Link {...linkProps}>Type another passage</Link>
+        <br />
+        <span style={{fontWeight: 'bold'}}>Overall Stats</span>
+        <br />
+        <table {...tableProps}>
+          <tbody>
+            <tr><td>Average speed:</td><td>{averageWPM.toFixed(1)} WPM</td></tr>
+            <tr><td>Average accuracy:</td><td>{averageAcc.toFixed(2)}%</td></tr>
+            <tr><td>Personal record:</td><td>{personalRecord.toFixed(1)} WPM</td></tr>
+          </tbody>
+        </table>
+        <br />
+        <span style={{fontWeight: 'bold'}}>Last ten passages</span>
         <br />
         {last10}
-        <br />
-        <button onClick={this.clearStats.bind(this)}>Clear Stats</button>
+        <br /><br />
+        <span {...clearStatsProps}>{this.state.confirmed ? 'Are you sure?' : 'Clear Stats'}</span>
       </BoxShadow>
     )
   }

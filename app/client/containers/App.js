@@ -7,7 +7,7 @@ const appProps = {
     width: '100%',
     display: 'flex',
     flexFlow: 'column nowrap',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: background(),
     fontFamily: 'sans-serif'
