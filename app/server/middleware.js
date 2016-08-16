@@ -2,6 +2,7 @@
 import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
+import favicon from 'serve-favicon'
 import morgan from 'morgan'
 import config from '../../config'
 
@@ -30,6 +31,7 @@ export default (app) => {
   app.use(express.static(path.join(__dirname, '..', 'public')))
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
+  app.use(favicon(path.join(__dirname, '..', 'public', 'favicon.ico')))
   if (config.env !== 'production') {
     app.use(morgan('custom'))
   }
