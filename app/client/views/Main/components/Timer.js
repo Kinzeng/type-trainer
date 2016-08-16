@@ -79,10 +79,6 @@ export default class Timer extends React.Component {
     }
   }
 
-  preciseTick () {
-    this.props.incrementTime()
-  }
-
   finish () {
     clearInterval(this.state.timer)
     clearInterval(this.state.preciseTimer)

@@ -22,6 +22,10 @@ export function white (alpha = 1) {
   return `rgba(255, 255, 255, ${alpha})`
 }
 
+export function gray (alpha = 1) {
+  return `rgba(150, 150, 160, ${alpha})`
+}
+
 export function green (alpha = 1) {
   return `rgba(180, 240, 100, ${alpha})`
 }

@@ -4,12 +4,14 @@ import App from '../containers/App'
 
 import Main from '../views/Main'
 import Stats from '../views/Stats'
+import NotFound from '../views/404'
 
 export default (
   <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Main} />
       <Route path='/stats' component={Stats} />
+      <Route path='*' component={NotFound} />
     </Route>
   </Router>
 )
