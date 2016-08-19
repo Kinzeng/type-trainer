@@ -1,5 +1,5 @@
 import React from 'react'
-import {orange} from '../../../colors'
+import {blue, orange} from '../../../colors'
 
 const titleStyle = {
   marginTop: '0px',
@@ -18,13 +18,22 @@ const signatureStyle = {
   margin: 0
 }
 
+const LINK = 'https://github.com/Kinzeng'
+const linkProps = {
+  href: LINK,
+  target: '_blank',
+  style: {
+    textDecoration: 'none',
+    color: blue()
+  }
+}
 const signatures = [
-  'Created by one of the ten million Kevin Zhangs',
-  'Created by Kevin Zhang #1028392',
-  'Created by probably the fifth Kevin Zhang you know',
-  'Created by Kevin Zhang (ugh, not another Kevin Zhang)',
-  'Created by Kevin Zhang. Not that Kevin Zhang, the other Kevin Zhang.',
-  'Created by Kevin Zhang (there are quite a few of us, ya know)'
+  <span>Created by one of the ten million <a {...linkProps}>Kevin Zhangs</a></span>,
+  <span>Created by <a {...linkProps}>Kevin Zhang #1028392</a></span>,
+  <span>Created by probably the fifth <a {...linkProps}>Kevin Zhang</a> you know</span>,
+  <span>Created by <a {...linkProps}>Kevin Zhang</a> (ugh, not another Kevin Zhang)</span>,
+  <span>Created by <a {...linkProps}>Kevin Zhang</a>. Not that Kevin Zhang, the other Kevin Zhang.</span>,
+  <span>Created by <a {...linkProps}>Kevin Zhang</a> (there are quite a few of us, ya know)</span>
 ]
 
 export default class Welcome extends React.Component {

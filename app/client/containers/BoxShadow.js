@@ -2,7 +2,6 @@ import React from 'react'
 import {shadow, cardBackground} from '../colors'
 
 const defaultContainerStyle = {
-  backgroundColor: 'white',
   boxShadow: `0px 1px 5px 5px ${shadow(0.3)}`,
   borderRadius: '10px',
   overflow: 'hidden'
