@@ -105,5 +105,37 @@ responded, attempting to defend himself.`,
 
   `Don't you ever feel the weight of the universe crushing down on your soul,
 forcing you to gasp what little air you can get until you finally suffocate
-from loneliness? Yeah, me neither.`
+from loneliness? Yeah, me neither.`,
+
+  `Then again, the weight of the universe might not be all that great, since
+there's no gravity up in space. Maybe the weight of the universe is actually
+nothing at all and everything is in my head. But there's no air up there so I
+guess breathing is still a no go.`,
+
+  `A magical spell is binding our hero in place. He can't move. As hard as he
+tries, he just can't break the mystical chains holding him prisoner. Then he
+hears a peculiar sound and jumps up out of bed after realizing it's the alarm he
+snoozed five times. He's late for school!`,
+
+  `A horde of undead tails our hero, a mass of limbs and feral screams. Our hero
+rounds the corner as the horde crashes into the wall behind him. He sprints
+through the doorway, escaping the nightmare once and for all. His teacher says
+to him, "You're late, Mr. Norman. Please take a seat."`,
+
+  `Our hero steps up to the golden sphere and stares in awe. As he gently
+caresses the treasure, the world's secrets unfold before him. He then looks up
+at the boss lady's face, which threatened termination if he didn't remove his
+hands immediately.`,
+
+  `Our hero swings his staff at the trolls, fending them off one by one. He must
+fight his way back if he wishes to return home. The art of the bo staff is one
+he has trained in for many months and required his utmost concentration until
+one of the trolls yells, "Sir! Can you stop swinging your broom around the shop?
+I'm just trying to buy some milk!"`,
+
+  `The princess is just on the floor above, and all our hero needs to do is
+climb one more flight of stairs. He can just imagine what she would say when he
+reaches the top. "Oh Sir Dashing! I'm so grateful that you are here to save me!"
+As he opens the door to the princess's chambers, his friend Jerry greets him
+into his 15th floor apartment.`
 ]
