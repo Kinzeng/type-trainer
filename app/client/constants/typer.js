@@ -137,5 +137,14 @@ I'm just trying to buy some milk!"`,
 climb one more flight of stairs. He can just imagine what she would say when he
 reaches the top. "Oh Sir Dashing! I'm so grateful that you are here to save me!"
 As he opens the door to the princess's chambers, his friend Jerry greets him
-into his 15th floor apartment.`
+into his 15th floor apartment.`,
+
+  `Our hero falls to his knees in exhaustion. The desert of Alugn seems to
+stretch out forever, but our hero never quits. David walks another couple steps
+and puts his feet in the shallow water as the waves rush in to greet him.`,
+
+  `Our hero opens the ancient tome, unraveling the arcane mysteries of the
+mages. As he flips through the pages, he realizes that the actual words were
+much more boring than he anticipated. And he had to turn in a book report the
+next day.`
 ]
