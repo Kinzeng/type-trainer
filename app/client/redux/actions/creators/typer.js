@@ -1,4 +1,4 @@
-import {START_COUNTDOWN, START_TYPING, FINISH_TYPING, SET_TEXT} from '../types'
+import {START_COUNTDOWN, START_TYPING, LONG_TYPO, FINISH_TYPING, SET_TEXT} from '../types'
 import {calculateWPM, calculateAccuracy} from '../../../utils'
 import {SAGA_LENGTH} from '../../../constants/typer'
 
@@ -18,6 +18,14 @@ export function startCountdown () {
 
 export function startTyping () {
   return {type: START_TYPING}
+}
+
+export function showLongTypo () {
+  return {type: LONG_TYPO, typo: true}
+}
+
+export function clearLongTypo () {
+  return {type: LONG_TYPO, typo: false}
 }
 
 export function finishTyping (text, time, chars, saveStats, textIndex) {

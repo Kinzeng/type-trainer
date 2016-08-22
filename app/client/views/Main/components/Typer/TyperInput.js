@@ -1,11 +1,11 @@
 import React from 'react'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../../constants/typer'
-import {red, inputBackground, white, black, shadow} from '../../../../colors'
+import {red, inputBackground, white, shadow} from '../../../../colors'
 
 export default class TyperInput extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {inputValue: ''}
+    this.state = {inputValue: '', correct: true, numWrong: 0}
   }
 
   componentWillReceiveProps (nextProps) {
@@ -28,15 +28,31 @@ export default class TyperInput extends React.Component {
       } else if (e.target.value === this.props.nextWord + ' ') {
         this.setState({inputValue: ''})
         this.props.getNextWord()
+      } else if (!(this.props.nextWord + ' ').startsWith(e.target.value)) {
+        const numWrong = this.state.numWrong + 1
+        this.setState({
+          correct: false,
+          numWrong,
+          inputValue: e.target.value
+        })
+
+        if (numWrong === 10) {
+          this.props.showLongTypo()
+        }
       } else {
-        this.setState({inputValue: e.target.value})
+        this.props.clearLongTypo()
+        this.setState({
+          correct: true,
+          numWrong: 0,
+          inputValue: e.target.value
+        })
       }
     }
   }
 
   render () {
-    const correct = (this.props.nextWord + ' ').startsWith(this.state.inputValue)
-    const color = correct ? white() : red()
+    console.log(this.state.numWrong)
+    const color = this.state.correct ? white() : red()
 
     const inputProps = {
       value: this.state.inputValue,

@@ -6,7 +6,8 @@ import Welcome from './components/Welcome'
 import Timer from './components/Timer'
 import Typer from './components/Typer'
 import Results from './components/Results'
-import {startCountdown, startTyping, finishTyping, setText} from '../../redux/actions/creators/typer'
+import {startCountdown, startTyping, showLongTypo, clearLongTypo,
+        finishTyping, setText} from '../../redux/actions/creators/typer'
 import {INIT, DONE} from '../../constants/typer'
 
 const mainProps = {
@@ -80,9 +81,12 @@ class Main extends React.Component {
     const typerProps = {
       stage: this.props.stage,
       text: this.props.text,
-      finishTyping: this.finishTyping.bind(this),
+      longTypo: this.props.longTypo,
       setText: this.props.setText,
-      incrementChars: this.incrementChars.bind(this)
+      showLongTypo: this.props.showLongTypo,
+      clearLongTypo: this.props.clearLongTypo,
+      incrementChars: this.incrementChars.bind(this),
+      finishTyping: this.finishTyping.bind(this)
     }
 
     const statsProps = {
@@ -117,6 +121,7 @@ const mapStateToProps = (state) => {
   return {
     stage: state.typer.stage,
     text: state.typer.text,
+    longTypo: state.typer.longTypo,
     wpm: state.typer.wpm,
     accuracy: state.typer.accuracy
   }
@@ -124,10 +129,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setText: bindActionCreators(setText, dispatch),
     startCountdown: bindActionCreators(startCountdown, dispatch),
     startTyping: bindActionCreators(startTyping, dispatch),
-    finishTyping: bindActionCreators(finishTyping, dispatch),
-    setText: bindActionCreators(setText, dispatch)
+    showLongTypo: bindActionCreators(showLongTypo, dispatch),
+    clearLongTypo: bindActionCreators(clearLongTypo, dispatch),
+    finishTyping: bindActionCreators(finishTyping, dispatch)
   }
 }
 

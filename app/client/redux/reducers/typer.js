@@ -1,7 +1,7 @@
-import {START_COUNTDOWN, START_TYPING, FINISH_TYPING, SET_TEXT} from '../actions/types'
+import {START_COUNTDOWN, START_TYPING, LONG_TYPO, FINISH_TYPING, SET_TEXT} from '../actions/types'
 import {INIT, COUNTDOWN, ACTIVE, DONE} from '../../constants/typer'
 
-let initialState = {stage: INIT, text: '', wpm: ''}
+let initialState = {stage: INIT, text: '', longTypo: false, wpm: 0, accuracy: 0}
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -16,6 +16,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         stage: ACTIVE
+      }
+    }
+
+    case LONG_TYPO: {
+      return {
+        ...state,
+        longTypo: action.typo
       }
     }
 

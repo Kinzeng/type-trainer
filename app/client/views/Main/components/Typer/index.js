@@ -65,6 +65,7 @@ export default class Typer extends React.Component {
 
     const textProps = {
       done,
+      longTypo: this.props.longTypo,
       text: this.state.text,
       currentIndex: this.state.currentIndex
     }
@@ -75,6 +76,8 @@ export default class Typer extends React.Component {
       lastWord: this.state.lastWord,
       nextWord: this.state.nextWord,
       getNextWord: this.getNextWord.bind(this),
+      showLongTypo: this.props.showLongTypo,
+      clearLongTypo: this.props.clearLongTypo,
       finishTyping: this.props.finishTyping,
       incrementChars: this.props.incrementChars
     }
