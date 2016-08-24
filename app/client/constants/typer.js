@@ -148,3 +148,7 @@ mages. As he flips through the pages, he realizes that the actual words were
 much more boring than he anticipated. And he had to turn in a book report the
 next day.`
 ]
+
+export const tips = [
+  'Focus on accuracy, for every wrong keystroke you\'re typing three extra keys!'
+]
