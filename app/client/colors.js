@@ -1,3 +1,6 @@
+// file for all the colors used in the app
+// they are exported as functions so that we may enter an alpha value if needed
+
 export function background (alpha = 1) {
   return `rgba(60, 75, 90, ${alpha})`
 }

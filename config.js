@@ -1,3 +1,5 @@
+// file that handles the different config options based on NODE_ENV
+
 const env = process.env.NODE_ENV || 'development'
 
 const config = {

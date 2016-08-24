@@ -11,6 +11,8 @@ class Root extends React.Component {
   }
 
   render () {
+    // pass down the redux stare through the Provider
+    // allows connect to pass in needed parts of the store as props
     return (
       <Provider store={this.store}>
         {routes}

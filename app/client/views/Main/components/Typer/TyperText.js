@@ -15,14 +15,17 @@ const textProps = {
 
 export default class TyperText extends React.Component {
   render () {
-    const textArray = this.props.text.split(' ')
-    const text = textArray.map((word, index) => {
+    // render the chosen text in a series of p tags
+    const text = this.props.textArray.map((word, index) => {
       let color
       if (!this.props.done && index === this.props.currentIndex) {
+        // display the current word in green
         color = green()
       } else if (this.props.longTypo) {
+        // display all the other words in red if the user has a long typo
         color = red()
       } else {
+        // otherwise render all other words in white
         color = white()
       }
 

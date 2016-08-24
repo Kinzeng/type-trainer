@@ -3,6 +3,8 @@ import {INIT, COUNTDOWN, ACTIVE, DONE} from '../../constants/typer'
 
 let initialState = {stage: INIT, text: '', longTypo: false, wpm: 0, accuracy: 0}
 
+// reducer for the typer
+// handles all the actions and sets the redux state accordingly
 export default function (state = initialState, action) {
   switch (action.type) {
     case START_COUNTDOWN: {

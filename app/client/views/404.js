@@ -18,6 +18,7 @@ const linkProps = {
   }
 }
 
+// display a 404 page that links to the homepage if the user navigates to an unknown page
 export default (props) => {
   return (
     <div {...notFoundProps}>

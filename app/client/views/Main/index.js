@@ -53,14 +53,17 @@ class Main extends React.Component {
   }
 
   finishTyping (saveStats, textIndex) {
+    // call the redux action to calculate stats if saveStats is true and set the stage to done
     this.props.finishTyping(this.props.text, this.state.time, this.state.chars + 1, saveStats, textIndex)
     this.setState({time: 0, chars: 0})
   }
 
+  // called every precise tick in the Timer
   incrementTime () {
     this.setState({time: this.state.time + 1})
   }
 
+  // called when the user types a character, used to calculate accuracy
   incrementChars () {
     this.setState({chars: this.state.chars + 1})
   }
@@ -94,6 +97,7 @@ class Main extends React.Component {
       accuracy: this.props.accuracy
     }
 
+    // display the welcome page if the user just got to the website
     let view
     if (this.props.stage === INIT) {
       view = <Welcome {...welcomeProps} />

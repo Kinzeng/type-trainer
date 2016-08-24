@@ -6,6 +6,9 @@ import favicon from 'serve-favicon'
 import morgan from 'morgan'
 import config from '../../config'
 
+// custom morgan format to display the colors accordingly
+// most of this was copied from the morgan source code with
+// small modifications
 morgan.format('custom', function developmentFormatLine (tokens, req, res) {
   var status = res._header
     ? res.statusCode
@@ -27,11 +30,13 @@ morgan.format('custom', function developmentFormatLine (tokens, req, res) {
   return fn(tokens, req, res)
 })
 
+// apply the middleware and return the app with the middleware applied
 export default (app) => {
   app.use(express.static(path.join(__dirname, '..', 'public')))
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
   app.use(favicon(path.join(__dirname, '..', 'public', 'favicon.ico')))
+  // only use logging if not in production
   if (config.env !== 'production') {
     app.use(morgan('custom'))
   }

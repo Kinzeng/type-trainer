@@ -6,6 +6,7 @@ import Main from '../views/Main'
 import Stats from '../views/Stats'
 import NotFound from '../views/404'
 
+// returns the react-router routes to display the views client side
 export default (
   <Router history={browserHistory}>
     <Route path='/' component={App}>

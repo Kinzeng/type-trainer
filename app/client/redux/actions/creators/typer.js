@@ -12,22 +12,27 @@ const initialStats = {
   sagaProgress: -1
 }
 
+// set the stage to countdown
 export function startCountdown () {
   return {type: START_COUNTDOWN}
 }
 
+// set the stage to active
 export function startTyping () {
   return {type: START_TYPING}
 }
 
+// the user has a long typo
 export function showLongTypo () {
   return {type: LONG_TYPO, typo: true}
 }
 
+// the user fixed the long typo
 export function clearLongTypo () {
   return {type: LONG_TYPO, typo: false}
 }
 
+// set the stage to done and calculate and store stats if necessary
 export function finishTyping (text, time, chars, saveStats, textIndex) {
   if (saveStats) {
     const wpm = calculateWPM(text, time)
@@ -57,6 +62,9 @@ export function finishTyping (text, time, chars, saveStats, textIndex) {
     }
 
     // store stats into correct "last 10" spot
+    // the arrays are rotating arrays in that every time a new entry is entered,
+    // the oldest entry is replaced, and we display the stats in the correct order
+    // in the Stats component based on the number of passages stored
     stats.last10WPM[num % 10] = wpm
     stats.last10Acc[num % 10] = accuracy
 
@@ -65,6 +73,8 @@ export function finishTyping (text, time, chars, saveStats, textIndex) {
       stats.sagaProgress = Math.max(sagaProgress, textIndex)
     }
 
+    // store the stats in localStorage so that the user's stats are saved even when leaving
+    // the webpage
     window.localStorage.setItem('stats', JSON.stringify(stats))
     return {type: FINISH_TYPING, time, chars, wpm, accuracy: `${accuracy}%`}
   }
@@ -72,6 +82,7 @@ export function finishTyping (text, time, chars, saveStats, textIndex) {
   return {type: FINISH_TYPING, wpm: null, accuracy: null}
 }
 
+// set the current text that the user is typing
 export function setText (text) {
   return {type: SET_TEXT, text}
 }

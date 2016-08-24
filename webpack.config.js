@@ -2,8 +2,8 @@
 var path = require('path')
 var webpack = require('webpack')
 
-var BUILD_DIR = path.resolve(__dirname, 'app/public/build')
-var APP_DIR = path.resolve(__dirname, 'app/client')
+var BUILD_DIR = path.resolve(__dirname, 'app', 'public', 'build')
+var APP_DIR = path.resolve(__dirname, 'app', 'client')
 
 var config = {
   stats: {
@@ -16,7 +16,8 @@ var config = {
   },
   entry: [
     'babel-polyfill',
-    path.join(APP_DIR, 'index.js')],
+    path.join(APP_DIR, 'index.js')
+  ],
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',

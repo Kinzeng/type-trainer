@@ -1,3 +1,5 @@
+// passages that we may not use
+
 export const passages = [
   `Living in New York City, I pass by hundreds of people on the street.
 And at those moments in time our lives intersect, for just a second. But

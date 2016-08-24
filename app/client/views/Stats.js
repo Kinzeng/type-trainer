@@ -34,6 +34,7 @@ const tdProps = {
   }
 }
 
+// determine the first passage stats at the top based on the number of passages typed
 function determineStart (num) {
   if (num <= 10) {
     return 0
@@ -45,7 +46,7 @@ function determineStart (num) {
 export default class Stats extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {confirmed: false}
+    this.state = {stats: null, confirmed: false}
   }
 
   componentWillMount () {
@@ -54,8 +55,10 @@ export default class Stats extends React.Component {
 
   clearStats () {
     if (!this.state.confirmed) {
+      // don't clear the stats unless the user clicks the button twice
       this.setState({confirmed: true})
     } else {
+      // clear stats in localStorage and the state
       window.localStorage.removeItem('stats')
       this.setState({stats: null, confirmed: false})
     }
@@ -84,6 +87,8 @@ export default class Stats extends React.Component {
     let wpmAve = 0
     let accAve = 0
     let count = 0
+    // display the last ten passages in order of oldest to newest
+    // the last10 arrays are rotating arrays
     for (let i = determineStart(num); count < last10WPM.length; i = (i + 1) % 10) {
       const wpm = last10WPM[i]
       const acc = last10Acc[i]

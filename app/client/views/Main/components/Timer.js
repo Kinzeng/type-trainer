@@ -30,18 +30,23 @@ export default class Timer extends React.Component {
   }
 
   componentWillUnmount () {
+    // finish typing if the user leaves the page
     if (this.props.stage === ACTIVE || this.props.stage === COUNTDOWN) {
       this.finish()
     }
   }
 
+  // starts the countdown
   startCountdown () {
     this.setState({minutes: 0, seconds: 3})
+    // set the redux state to countdown
     this.props.startCountdown()
 
+    // decrement the displayed timer every second
     const timer = setInterval(() => {
       const nextSecond = this.state.seconds - 1
       if (nextSecond < 0) {
+        // when the countdown finishes, start typing
         clearInterval(timer)
         this.start()
       } else {
@@ -61,9 +66,12 @@ export default class Timer extends React.Component {
     // WPM is more accurate
     const preciseTimer = setInterval(this.props.incrementTime, 5)
     this.setState({timer, preciseTimer})
+
+    // set the redux state to active
     this.props.startTyping()
   }
 
+  // decrement the displayed timer every second
   tick () {
     let nextMinute = this.state.minutes
     let nextSecond = this.state.seconds - 1
@@ -79,10 +87,13 @@ export default class Timer extends React.Component {
     }
   }
 
+  // clear both timers so that they don't continue to tick
   finish () {
     clearInterval(this.state.timer)
     clearInterval(this.state.preciseTimer)
     this.setState({timer: null})
+
+    // set redux state to done, but don't calculate stats
     this.props.finishTyping(false)
   }
 
@@ -105,6 +116,8 @@ export default class Timer extends React.Component {
       }
     }
 
+    // if the stage is countdown or active, show the timer
+    // otherwise, show a button to start another passage
     return (
       <div {...containerProps}>
         <div style={timerStyle}>

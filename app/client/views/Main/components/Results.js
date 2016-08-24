@@ -47,6 +47,9 @@ const linkProps = {
 export default class Results extends React.Component {
   render () {
     if (this.props.wpm && this.props.accuracy) {
+      // if the user finished typing a passage
+
+      // pick a random tip from the arry of tips in constants
       const tip = tips[randomInt(0, tips.length)]
       return (
         <div {...resultsProps}>
@@ -59,6 +62,7 @@ export default class Results extends React.Component {
         </div>
       )
     } else {
+      // if the user ran out of time or left the page
       return (
         <div {...resultsProps}>
           You ran out of time or left the page, so your stats weren't saved

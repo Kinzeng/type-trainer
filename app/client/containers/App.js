@@ -16,6 +16,8 @@ const appProps = {
   }
 }
 
+// the main app component that is rendered on every page
+// styles the background
 export default class App extends React.Component {
   render () {
     return (

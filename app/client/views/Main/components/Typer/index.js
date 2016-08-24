@@ -21,11 +21,13 @@ export default class Typer extends React.Component {
   }
 
   componentWillMount () {
+    // choose a new passage when first mounting the component
     this.selectText()
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.stage !== this.props.stage && nextProps.stage === COUNTDOWN) {
+      // choose a new passage when the stage is switching to countdown
       this.selectText()
     }
   }
@@ -34,22 +36,37 @@ export default class Typer extends React.Component {
     const stats = JSON.parse(window.localStorage.getItem('stats')) || {sagaProgress: -1}
     const {sagaProgress} = stats
 
+    // select a random passage in the passages
     let index = randomInt(0, passages.length)
 
-    if (index < SAGA_LENGTH) { // if a saga passage is chosen
-      if (sagaProgress < SAGA_LENGTH - 1) { // select the next saga passage if the user hasn't finished the saga
+    if (index < SAGA_LENGTH) {
+      // if a saga passage is chosen
+      if (sagaProgress < SAGA_LENGTH - 1) {
+        // select the next saga passage if the user hasn't finished the saga
         index = sagaProgress + 1
-      } else if (Math.random() > 0.5) { // make the saga text less likely to appear after they've completed it
+      } else if (Math.random() > 0.5) {
+        // make the saga text less likely to appear after they've completed it
         index = randomInt(SAGA_LENGTH, passages.length)
       }
     }
 
+    // replace any newlines in the text that were used for readability in the constants file
     const text = passages[index].replace(/\r?\n|\r/g, ' ')
     const textArray = text.split(' ')
-    this.setState({text, textArray, textIndex: index, nextWord: textArray[0], lastWord: false, currentIndex: 0})
+    this.setState({
+      text,
+      textArray,
+      textIndex: index,
+      nextWord: textArray[0],
+      lastWord: false,
+      currentIndex: 0
+    })
+
+    // set the text in the redux state
     this.props.setText(text)
   }
 
+  // get the next word that the user should type
   getNextWord () {
     const nextIndex = this.state.currentIndex + 1
     this.setState({currentIndex: nextIndex, nextWord: this.state.textArray[nextIndex]})
@@ -59,14 +76,19 @@ export default class Typer extends React.Component {
   }
 
   render () {
-    const active = this.props.stage === ACTIVE
     const countdown = this.props.stage === COUNTDOWN
+    const active = this.props.stage === ACTIVE
     const done = this.props.stage === DONE
+
+    // only render the typer components if the stage is countdown, active, or done
+    if (!(countdown || active || done)) {
+      return <div />
+    }
 
     const textProps = {
       done,
       longTypo: this.props.longTypo,
-      text: this.state.text,
+      textArray: this.state.textArray,
       currentIndex: this.state.currentIndex
     }
 
@@ -82,7 +104,7 @@ export default class Typer extends React.Component {
       incrementChars: this.props.incrementChars
     }
 
-    if (active || countdown || done) {
+    if (countdown || active || done) {
       return (
         <div {...typerProps}>
           <TyperText {...textProps} />

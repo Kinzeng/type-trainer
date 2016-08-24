@@ -5,68 +5,90 @@ import {red, inputBackground, white, shadow} from '../../../../colors'
 export default class TyperInput extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {inputValue: '', correct: true, numWrong: 0}
+    this.state = {inputValue: '', numWrong: 0}
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.stage !== nextProps.stage &&
-       (nextProps.stage === ACTIVE || nextProps.stage === COUNTDOWN)) {
+    // focus and clear the input when the stage is countdown or active
+    if ((this.props.stage !== nextProps.stage && nextProps.stage === ACTIVE) ||
+         nextProps.stage === COUNTDOWN) {
       this.setState({inputValue: ''})
       this.input.focus()
     }
   }
 
   onChange (e) {
+    // only allow the input to change if the typer is active
     if (this.props.stage === ACTIVE) {
-      if (this.state.inputValue.length < e.target.value.length) {
+      const newValue = e.target.value
+
+      // increment number of chars typed if the user typed a new char
+      // (don't count it if the user is just deleting characters)
+      if (this.state.inputValue.length < newValue.length) {
         this.props.incrementChars()
       }
 
-      if (this.props.lastWord && e.target.value === this.props.nextWord) {
+      if (this.props.lastWord && newValue === this.props.nextWord) {
+        // if this is the last word and the user matched the word, finish typing
         this.setState({inputValue: ''})
         this.props.finishTyping(true, this.props.textIndex)
-      } else if (e.target.value === this.props.nextWord + ' ') {
+      } else if (newValue === this.props.nextWord + ' ') {
+        // otherwise get the next word if the user matched the word
         this.setState({inputValue: ''})
         this.props.getNextWord()
-      } else if (!(this.props.nextWord + ' ').startsWith(e.target.value)) {
+      } else if (!(this.props.nextWord + ' ').startsWith(newValue)) {
+        // if the user has a typo, increment number of wrong characters and set the input occordingly
         const numWrong = this.state.numWrong + 1
         this.setState({
-          correct: false,
           numWrong,
-          inputValue: e.target.value
+          inputValue: newValue
         })
 
-        if (numWrong === 10) {
+        // if the number of wrong characters is high enough, call the redux action passed in
+        if (numWrong === 15) {
           this.props.showLongTypo()
         }
-      } else {
+      } else { // otherwise clear the long typo and reset the number of wrong characters
         this.props.clearLongTypo()
         this.setState({
-          correct: true,
           numWrong: 0,
-          inputValue: e.target.value
+          inputValue: newValue
         })
       }
     }
   }
 
+  onKeyDown (e) {
+    // prevent input from being blurred if the user hits tab
+    if (e.keyCode === 9) {
+      e.preventDefault()
+    }
+  }
+
+  // prevent input from being blurred
+  onBlur (e) {
+    e.target.focus()
+  }
+
   render () {
-    console.log(this.state.numWrong)
-    const color = this.state.correct ? white() : red()
+    // turn the input text red if the user has a typo
+    const color = this.state.numWrong === 0 ? white() : red()
 
     const inputProps = {
       value: this.state.inputValue,
       onChange: this.onChange.bind(this),
+      onBlur: this.onBlur.bind(this),
+      onKeyDown: this.onKeyDown.bind(this),
       autoFocus: true,
       ref: (ref) => { this.input = ref },
       style: {
+        padding: '4px',
         width: '100%',
+        outline: 'none',
+        border: 'none',
         color,
         backgroundColor: inputBackground(),
         fontSize: '2em',
-        outline: 'none',
-        border: 'none',
-        padding: '4px',
         boxShadow: `inset 0px 0px 10px 4px ${shadow(0.5)}`
       },
       disabled: this.props.stage === DONE

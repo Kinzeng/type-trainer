@@ -12,6 +12,8 @@ const defaultContentStyle = {
   backgroundColor: cardBackground()
 }
 
+// displays the child, but styles the surrounding container to have a
+// rounded corner and a box shadow
 export default class BoxShadow extends React.Component {
   render () {
     const containerStyle = {

@@ -1,3 +1,6 @@
+// file that stores all the constants in used in the typer,
+// including all the possible passages and tips to be displayed
+
 export const INIT = 'init'
 export const COUNTDOWN = 'countdown'
 export const ACTIVE = 'active'
@@ -150,5 +153,5 @@ next day.`
 ]
 
 export const tips = [
-  'Focus on accuracy, for every wrong keystroke you\'re typing three extra keys!'
+  'Try to focus on accuracy. For every wrong keystroke you\'re typing two extra keys!'
 ]

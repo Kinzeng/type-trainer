@@ -7,7 +7,7 @@ const titleStyle = {
 }
 
 const textStyle = {
-  lineHeight: '30px',
+  lineHeight: '1.75em',
   marginTop: '0px',
   marginBottom: '20px'
 }
@@ -46,6 +46,7 @@ export default class Welcome extends React.Component {
       }
     }
 
+    // choose a random signature from the array
     const index = Math.floor(Math.random() * signatures.length)
     const signature = signatures[index]
 
