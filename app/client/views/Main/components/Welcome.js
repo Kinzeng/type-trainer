@@ -58,7 +58,7 @@ export default class Welcome extends React.Component {
           fast as you can once the countdown finishes. After each passage, your
           words per minute (WPM) and accuracy will be displayed. You can also
           check stats like your overall average speed and accuracy, averages
-          for your last ten passages, and your personal record.
+          for your last ten passages, and your personal&nbsp;record.
           <br /><br />
             Right now there is one series of passages that tell a story along with
           other random passages that don't really mean anything. I'll try to add
