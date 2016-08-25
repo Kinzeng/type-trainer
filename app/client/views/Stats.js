@@ -5,7 +5,7 @@ import {red, orange} from '../colors'
 
 const boxProps = {
   containerStyle: {
-    // marginTop: '40px'
+
   },
   contentStyle: {
     display: 'flex',
