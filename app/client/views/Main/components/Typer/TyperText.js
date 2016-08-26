@@ -30,7 +30,7 @@ export default class TyperText extends React.Component {
       }
 
       let style = {
-        marginRight: '5px',
+        marginRight: '0.3em',
         marginTop: '0px',
         color
       }
