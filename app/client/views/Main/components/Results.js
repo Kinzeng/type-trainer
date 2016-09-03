@@ -1,8 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
 import {blue} from '../../../colors'
-import {randomInt} from '../../../utils'
-import {tips} from '../../../constants/typer'
 
 const resultsProps = {
   style: {
@@ -28,13 +26,6 @@ const statsTextProps = {
   }
 }
 
-const tipProps = {
-  style: {
-    margin: '0 0 10px',
-    fontSize: '0.75em'
-  }
-}
-
 const linkProps = {
   to: '/stats',
   style: {
@@ -49,15 +40,12 @@ export default class Results extends React.Component {
     if (this.props.wpm && this.props.accuracy) {
       // if the user finished typing a passage
 
-      // pick a random tip from the arry of tips in constants
-      const tip = tips[randomInt(0, tips.length)]
       return (
         <div {...resultsProps}>
           <div {...statsProps}>
             <p {...statsTextProps}>Speed: {this.props.wpm} WPM</p>
             <p {...statsTextProps}>Accuracy: {this.props.accuracy}</p>
           </div>
-          <p {...tipProps}>Tip: {tip}</p>
           <Link {...linkProps}>More stats</Link>
         </div>
       )

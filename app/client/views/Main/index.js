@@ -6,16 +6,25 @@ import Welcome from './components/Welcome'
 import Timer from './components/Timer'
 import Typer from './components/Typer'
 import Results from './components/Results'
+import Tips from './components/Tips'
 import {startCountdown, startTyping, showLongTypo, clearLongTypo,
         finishTyping, setText} from '../../redux/actions/creators/typer'
 import {INIT, DONE} from '../../constants/typer'
 
-const mainProps = {
-  containerStyle: {
-    alignSelf: 'center',
+const containerProps = {
+  style: {
     width: '50%',
     minWidth: '500px',
-    maxWidth: '800px'
+    maxWidth: '800px',
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+}
+
+const boxProps = {
+  containerStyle: {
   },
   contentStyle: {}
 }
@@ -26,6 +35,13 @@ const viewProps = {
     flexFlow: 'column nowrap',
     justifyContent: 'center',
     alignItems: 'center'
+  }
+}
+
+const tipProps = {
+  style: {
+    position: 'absolute',
+    bottom: '5%'
   }
 }
 
@@ -114,9 +130,16 @@ class Main extends React.Component {
     }
 
     return (
-      <BoxShadow {...mainProps}>
-        {view}
-      </BoxShadow>
+      <div {...containerProps}>
+        <BoxShadow {...boxProps}>
+          {view}
+        </BoxShadow>
+        {this.props.stage === DONE &&
+          <div {...tipProps}>
+            <Tips />
+          </div>
+        }
+      </div>
     )
   }
 }
