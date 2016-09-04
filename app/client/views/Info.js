@@ -39,7 +39,7 @@ const dvorakProps = {
 }
 
 const typeracerProps = {
-  to: 'http://typeracer.com',
+  to: 'http://play.typeracer.com/',
   target: '_blank',
   style: {
     textDecoration: 'none',
@@ -48,7 +48,7 @@ const typeracerProps = {
 }
 
 const reactProps = {
-  to: '/',
+  to: 'https://facebook.github.io/react/',
   target: '_blank',
   style: {
     textDecoration: 'none',
@@ -57,7 +57,7 @@ const reactProps = {
 }
 
 const reduxProps = {
-  to: '/',
+  to: 'http://redux.js.org/',
   target: '_blank',
   style: {
     textDecoration: 'none',
@@ -75,7 +75,7 @@ const githubProps = {
 }
 
 const emailProps = {
-  to: 'mailto: zhang4444@gmail.com',
+  to: 'mailto:zhang4444@gmail.com',
   style: {
     textDecoration: 'none',
     color: green()

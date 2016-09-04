@@ -24,8 +24,7 @@ const containerProps = {
 }
 
 const boxProps = {
-  containerStyle: {
-  },
+  containerStyle: {},
   contentStyle: {}
 }
 
