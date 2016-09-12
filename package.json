@@ -10,8 +10,9 @@
     "start": "npm run build && node bin",
     "monitor": "nodemon --ignore app/public/ --ignore app/client/ bin",
     "dev": "webpack -d --watch --progress & npm run monitor",
-    "build": "webpack -p",
-    "deploy": "gcloud app deploy gcloud.yaml"
+    "build": "NODE_ENV=production webpack -p",
+    "deploy": "gcloud app deploy gcloud.yaml",
+    "sync": "npm run build && gsutil -h Cache-Control:private cp -R ./app/public/** gs://type-trainer.kzhang.io"
   },
   "dependencies": {
     "babel-cli": "^6.11.4",

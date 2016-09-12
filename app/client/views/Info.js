@@ -30,7 +30,7 @@ const backProps = {
 }
 
 const dvorakProps = {
-  to: '/',
+  to: 'https://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard',
   target: '_blank',
   style: {
     textDecoration: 'none',
@@ -75,7 +75,7 @@ const githubProps = {
 }
 
 const emailProps = {
-  to: 'mailto:zhang4444@gmail.com',
+  href: 'mailto:zhang4444@gmail.com',
   style: {
     textDecoration: 'none',
     color: green()
@@ -87,10 +87,12 @@ export default class Info extends React.Component {
     return (
       <BoxShadow {...infoProps}>
         <Link {...backProps}>Back to home page</Link>
+        {/**
         <h1>Type Trainer Help</h1>
         <p {...textProps}>
 
         </p>
+        **/}
         <h1>About Me</h1>
         <p {...textProps}>
           I'm just a college student studying computer science at New York University,
@@ -101,7 +103,7 @@ export default class Info extends React.Component {
           especially since I get to fit the app to my own aesthetic tastes (I think typeracer's
           design and colors leave a lot to be desired). If you're interested in the source code
           for this project, it is available on my <Link {...githubProps}>github</Link>. If you have
-          any questions or comments, feel free to email me at <Link {...emailProps}>zhang4444@gmail.com</Link> and
+          any questions or comments, feel free to email me at <a {...emailProps}>zhang4444@gmail.com</a> and
           I'll get back to you as soon as I can!
         </p>
       </BoxShadow>
