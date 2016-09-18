@@ -10,3 +10,8 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+a:focus {
+  outline: none;
+  opacity: 0.5;
+}

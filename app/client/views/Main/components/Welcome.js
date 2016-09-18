@@ -18,10 +18,12 @@ const textProps = {
   }
 }
 
-const signatureStyle = {
-  textAlign: 'right',
-  fontSize: '0.75em',
-  margin: 0
+const signatureProps = {
+  style: {
+    textAlign: 'right',
+    fontSize: '0.75em',
+    margin: 0
+  }
 }
 
 const LINK = 'https://github.com/Kinzeng'
@@ -80,7 +82,7 @@ export default class Welcome extends React.Component {
           <br /><br />
           Click <span {...startProps}>here</span> to start or <Link {...infoProps}>here</Link> for more info.
         </p>
-        <p style={signatureStyle}>{signature}</p>
+        <p {...signatureProps}>{signature}</p>
       </div>
     )
   }

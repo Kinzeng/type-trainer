@@ -93,10 +93,10 @@ export default class Info extends React.Component {
 
         </p>
         **/}
-        <h1>About Me</h1>
+        <h2>About Me</h2>
         <p {...textProps}>
-          I'm just a college student studying computer science at New York University,
-          and I recently switched to the <Link {...dvorakProps}>Dvorak keyboard layout</Link> so
+          Hi! My name is Kevin Zhang and I'm a college student studying computer science at
+          New York University. I recently switched to the <Link {...dvorakProps}>Dvorak keyboard layout</Link> so
           I found myself spending a lot of time on <Link {...typeracerProps}>typeracer.com</Link>.
           I figured it would be a fun project to make an app that mimicked typeracer using my
           knowledge of <Link {...reactProps}>React</Link> and <Link {...reduxProps}>Redux</Link>,

@@ -1,6 +1,7 @@
 import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import FlexGrow from '../../containers/FlexGrow'
 import BoxShadow from '../../containers/BoxShadow'
 import Welcome from './components/Welcome'
 import Timer from './components/Timer'
@@ -13,12 +14,20 @@ import {INIT, DONE} from '../../constants/typer'
 
 const containerProps = {
   style: {
+    flexGrow: 1,
     width: '50%',
     minWidth: '500px',
     maxWidth: '800px',
     display: 'flex',
     flexFlow: 'column nowrap',
     justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+}
+
+const flexProps = {
+  style: {
+    display: 'flex',
     alignItems: 'center'
   }
 }
@@ -39,8 +48,7 @@ const viewProps = {
 
 const tipProps = {
   style: {
-    position: 'absolute',
-    bottom: '5%'
+    marginTop: '20px'
   }
 }
 
@@ -130,9 +138,11 @@ class Main extends React.Component {
 
     return (
       <div {...containerProps}>
-        <BoxShadow {...boxProps}>
-          {view}
-        </BoxShadow>
+        <FlexGrow {...flexProps}>
+          <BoxShadow {...boxProps}>
+            {view}
+          </BoxShadow>
+        </FlexGrow>
         {this.props.stage === DONE &&
           <div {...tipProps}>
             <Tips />
