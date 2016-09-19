@@ -154,5 +154,6 @@ next day.`
 
 export const tips = [
   'Try to focus on accuracy. For every wrong keystroke you\'re typing two extra keys!',
-  'Learning how to touch type, or typing without looking at your fingers, will speed you up greatly.'
+  'Learning how to touch type, or typing without looking at your fingers, will speed you up greatly.',
+  'You can press enter to start typing a new passage instead of clicking!'
 ]

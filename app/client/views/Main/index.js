@@ -13,6 +13,7 @@ import {startCountdown, startTyping, showLongTypo, clearLongTypo,
 import {INIT, DONE} from '../../constants/typer'
 
 const containerProps = {
+  tabIndex: 1,
   style: {
     flexGrow: 1,
     width: '50%',
@@ -21,7 +22,8 @@ const containerProps = {
     display: 'flex',
     flexFlow: 'column nowrap',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    outline: 'none'
   }
 }
 
@@ -58,6 +60,10 @@ class Main extends React.Component {
     this.state = {text: '', time: 0, chars: 0}
   }
 
+  componentDidMount () {
+    this.container.focus()
+  }
+
   // don't update if only the time changed
   shouldComponentUpdate (nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -91,7 +97,16 @@ class Main extends React.Component {
     this.setState({chars: this.state.chars + 1})
   }
 
+  onKeyPress (e) {
+    if ((this.props.stage === INIT || this.props.stage === DONE) && e.which === 13) {
+      this.props.startCountdown()
+    }
+  }
+
   render () {
+    containerProps.ref = (ref) => { this.container = ref }
+    containerProps.onKeyPress = this.onKeyPress.bind(this)
+
     const welcomeProps = {
       startCountdown: this.props.startCountdown
     }
@@ -105,6 +120,7 @@ class Main extends React.Component {
     }
 
     const typerProps = {
+      container: this.container,
       stage: this.props.stage,
       text: this.props.text,
       longTypo: this.props.longTypo,

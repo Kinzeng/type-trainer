@@ -15,16 +15,22 @@ const containerProps = {
 export default class Timer extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {minutes: 3, seconds: 0, timer: null}
+    this.state = {minutes: 3, seconds: 0, timer: null, preciseTimer: null}
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.stage === DONE) {
-      clearInterval(this.state.timer)
+    if (nextProps.stage === DONE) {   // clear the timers and state when the user finishes
+      clearInterval(this.state.timer) // typing the passage
       clearInterval(this.state.preciseTimer)
+      this.setState({timer: null, preciseTimer: null})
+    } else if (!this.state.timer &&                    // start the countdown if the timers
+               this.props.stage !== nextProps.stage && // aren't already ticking and if the
+               nextProps.stage === COUNTDOWN) {        // stage is on countdown
+      this.startCountdown()
     }
   }
 
+  // start countdown as soon as the page is loaded
   componentWillMount () {
     this.startCountdown()
   }
@@ -39,8 +45,10 @@ export default class Timer extends React.Component {
   // starts the countdown
   startCountdown () {
     this.setState({minutes: 0, seconds: 3})
-    // set the redux state to countdown
-    this.props.startCountdown()
+    // set the redux state to countdown if it's not already
+    if (this.props.stage !== COUNTDOWN) {
+      this.props.startCountdown()
+    }
 
     // decrement the displayed timer every second
     const timer = setInterval(() => {
@@ -91,7 +99,7 @@ export default class Timer extends React.Component {
   finish () {
     clearInterval(this.state.timer)
     clearInterval(this.state.preciseTimer)
-    this.setState({timer: null})
+    this.setState({timer: null, preciseTimer: null})
 
     // set redux state to done, but don't calculate stats
     this.props.finishTyping(false)
@@ -109,7 +117,7 @@ export default class Timer extends React.Component {
     }
 
     const startProps = {
-      onClick: this.startCountdown.bind(this),
+      onClick: this.props.startCountdown.bind(this),
       style: {
         color: orange(),
         cursor: 'pointer'

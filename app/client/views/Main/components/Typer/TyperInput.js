@@ -1,4 +1,5 @@
 import React from 'react'
+// import {findDOMNode} from 'react-dom'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../../constants/typer'
 import {red, inputBackground, white, shadow} from '../../../../colors'
 
@@ -10,10 +11,9 @@ export default class TyperInput extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     // focus and clear the input when the stage is countdown or active
-    if ((this.props.stage !== nextProps.stage && nextProps.stage === ACTIVE) ||
-         nextProps.stage === COUNTDOWN) {
+    if (this.props.stage !== nextProps.stage && (nextProps.stage === ACTIVE ||
+        nextProps.stage === COUNTDOWN)) {
       this.setState({inputValue: ''})
-      this.input.focus()
     }
   }
 
@@ -72,7 +72,11 @@ export default class TyperInput extends React.Component {
 
   render () {
     // turn the input text red if the user has a typo
-    const color = this.state.numWrong === 0 ? white() : red()
+    const color = this.props.stage === DONE
+                    ? 'transparent'
+                    : this.state.numWrong === 0
+                      ? white()
+                      : red()
 
     const inputProps = {
       value: this.state.inputValue,
@@ -90,8 +94,7 @@ export default class TyperInput extends React.Component {
         backgroundColor: inputBackground(),
         fontSize: '2em',
         boxShadow: `inset 0px 0px 10px 4px ${shadow(0.5)}`
-      },
-      disabled: this.props.stage === DONE
+      }
     }
 
     return <input {...inputProps} />
