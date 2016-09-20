@@ -1,6 +1,7 @@
 import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import KeyListener from '../../containers/KeyListener'
 import FlexGrow from '../../containers/FlexGrow'
 import BoxShadow from '../../containers/BoxShadow'
 import Welcome from './components/Welcome'
@@ -13,7 +14,6 @@ import {startCountdown, startTyping, showLongTypo, clearLongTypo,
 import {INIT, DONE} from '../../constants/typer'
 
 const containerProps = {
-  tabIndex: 1,
   style: {
     flexGrow: 1,
     width: '50%',
@@ -60,11 +60,6 @@ class Main extends React.Component {
     this.state = {text: '', time: 0, chars: 0}
   }
 
-  // focus the container so that the user can press enter to start
-  componentDidMount () {
-    this.container.focus()
-  }
-
   // don't update if only the time changed
   shouldComponentUpdate (nextProps, nextState) {
     if (this.props !== nextProps) {
@@ -105,7 +100,6 @@ class Main extends React.Component {
   }
 
   render () {
-    containerProps.ref = (ref) => { this.container = ref }
     containerProps.onKeyPress = this.onKeyPress.bind(this)
 
     const welcomeProps = {
@@ -154,7 +148,7 @@ class Main extends React.Component {
     }
 
     return (
-      <div {...containerProps}>
+      <KeyListener {...containerProps}>
         <FlexGrow {...flexProps}>
           <BoxShadow {...boxProps}>
             {view}
@@ -165,7 +159,7 @@ class Main extends React.Component {
             <Tips />
           </div>
         }
-      </div>
+      </KeyListener>
     )
   }
 }

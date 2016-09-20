@@ -1,6 +1,8 @@
 import React from 'react'
 import {shadow, cardBackground} from '../colors'
 
+const containerProps = {}
+
 const defaultContainerStyle = {
   boxShadow: `0px 1px 5px 5px ${shadow(0.3)}`,
   borderRadius: '10px',
@@ -16,7 +18,7 @@ const defaultContentStyle = {
 // rounded corner and a box shadow
 export default class BoxShadow extends React.Component {
   render () {
-    const containerStyle = {
+    containerProps.style = {
       ...defaultContainerStyle,
       ...this.props.containerStyle
     }
@@ -27,7 +29,7 @@ export default class BoxShadow extends React.Component {
     }
 
     return (
-      <div style={containerStyle}>
+      <div {...containerProps}>
         <div style={contentStyle}>
           {this.props.children}
         </div>

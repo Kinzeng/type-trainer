@@ -1,11 +1,17 @@
 import React from 'react'
-import {Link} from 'react-router'
+import {Link, withRouter} from 'react-router'
+import KeyListener from '../containers/KeyListener'
 import BoxShadow from '../containers/BoxShadow'
 import {red, orange} from '../colors'
 
+const keyListenerProps = {
+  style: {
+    outline: 'none'
+  }
+}
+
 const boxProps = {
   containerStyle: {
-
   },
   contentStyle: {
     display: 'flex',
@@ -43,7 +49,7 @@ function determineStart (num) {
   }
 }
 
-export default class Stats extends React.Component {
+class Stats extends React.Component {
   constructor (props) {
     super(props)
     this.state = {stats: null, confirmed: false}
@@ -64,6 +70,12 @@ export default class Stats extends React.Component {
     }
   }
 
+  onKeyPress (e) {
+    if (e.which === 13) {
+      this.props.router.push('/')
+    }
+  }
+
   render () {
     if (!this.state.stats) {
       return (
@@ -72,6 +84,8 @@ export default class Stats extends React.Component {
         </BoxShadow>
       )
     }
+
+    keyListenerProps.onKeyPress = this.onKeyPress.bind(this)
 
     const clearStatsProps = {
       onClick: this.clearStats.bind(this),
@@ -132,25 +146,29 @@ export default class Stats extends React.Component {
     )
 
     return (
-      <BoxShadow {...boxProps}>
-        <Link {...linkProps}>Type another passage</Link>
-        <br />
-        <span style={{fontWeight: 'bold'}}>Overall Stats</span>
-        <br />
-        <table {...tableProps}>
-          <tbody>
-            <tr><td>Average speed:</td><td>{averageWPM.toFixed(1)} WPM</td></tr>
-            <tr><td>Average accuracy:</td><td>{averageAcc.toFixed(2)}%</td></tr>
-            <tr><td>Personal record:</td><td>{personalRecord.toFixed(1)} WPM</td></tr>
-          </tbody>
-        </table>
-        <br />
-        <span style={{fontWeight: 'bold'}}>Last ten passages</span>
-        <br />
-        {last10}
-        <br /><br />
-        <span {...clearStatsProps}>{this.state.confirmed ? 'Are you sure?' : 'Clear Stats'}</span>
-      </BoxShadow>
+      <KeyListener {...keyListenerProps}>
+        <BoxShadow {...boxProps}>
+          <Link {...linkProps}>Type another passage</Link>
+          <br />
+          <span style={{fontWeight: 'bold'}}>Overall Stats</span>
+          <br />
+          <table {...tableProps}>
+            <tbody>
+              <tr><td>Average speed:</td><td>{averageWPM.toFixed(1)} WPM</td></tr>
+              <tr><td>Average accuracy:</td><td>{averageAcc.toFixed(2)}%</td></tr>
+              <tr><td>Personal record:</td><td>{personalRecord.toFixed(1)} WPM</td></tr>
+            </tbody>
+          </table>
+          <br />
+          <span style={{fontWeight: 'bold'}}>Last ten passages</span>
+          <br />
+          {last10}
+          <br /><br />
+          <span {...clearStatsProps}>{this.state.confirmed ? 'Are you sure?' : 'Clear Stats'}</span>
+        </BoxShadow>
+      </KeyListener>
     )
   }
 }
+
+export default withRouter(Stats)
