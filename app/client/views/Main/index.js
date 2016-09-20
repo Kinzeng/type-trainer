@@ -60,6 +60,7 @@ class Main extends React.Component {
     this.state = {text: '', time: 0, chars: 0}
   }
 
+  // focus the container so that the user can press enter to start
   componentDidMount () {
     this.container.focus()
   }
@@ -120,7 +121,6 @@ class Main extends React.Component {
     }
 
     const typerProps = {
-      container: this.container,
       stage: this.props.stage,
       text: this.props.text,
       longTypo: this.props.longTypo,
@@ -131,7 +131,8 @@ class Main extends React.Component {
       finishTyping: this.finishTyping.bind(this)
     }
 
-    const statsProps = {
+    const resultsProps = {
+      startCountdown: this.props.startCountdown,
       wpm: this.props.wpm,
       accuracy: this.props.accuracy
     }
@@ -146,7 +147,7 @@ class Main extends React.Component {
           <Timer {...timerProps} />
           <Typer {...typerProps} />
           {this.props.stage === DONE &&
-            <Results {...statsProps} />
+            <Results {...resultsProps} />
           }
         </div>
       )

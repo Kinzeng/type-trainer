@@ -1,7 +1,7 @@
 import React from 'react'
 import {displayTime} from '../../../utils'
 import {COUNTDOWN, ACTIVE, DONE} from '../../../constants/typer'
-import {red, green, orange} from '../../../colors'
+import {red, green, orange, gray} from '../../../colors'
 
 const containerProps = {
   style: {
@@ -107,21 +107,17 @@ export default class Timer extends React.Component {
 
   render () {
     const timerStyle = {
-      color: this.props.stage === ACTIVE ? green() : red(),
+      color: this.props.stage === ACTIVE
+        ? green()
+        : this.props.stage === COUNTDOWN
+          ? red()
+          : gray(),
       fontSize: '1.5em',
       margin: 'none'
     }
 
     const textStyle = {
-      margin: '0px'
-    }
-
-    const startProps = {
-      onClick: this.props.startCountdown.bind(this),
-      style: {
-        color: orange(),
-        cursor: 'pointer'
-      }
+      margin: 0
     }
 
     // if the stage is countdown or active, show the timer
@@ -129,10 +125,7 @@ export default class Timer extends React.Component {
     return (
       <div {...containerProps}>
         <div style={timerStyle}>
-          {this.props.stage === ACTIVE || this.props.stage === COUNTDOWN
-            ? <p style={textStyle}>{displayTime(this.state.minutes, this.state.seconds)}</p>
-            : <div {...startProps}>Another one!</div>
-          }
+          <p style={textStyle}>{displayTime(this.state.minutes, this.state.seconds)}</p>
         </div>
         {process.env.NODE_ENV !== 'production' &&
           <button style={{position: 'fixed', top: 0, left: 0}} onClick={this.finish.bind(this, true)}>

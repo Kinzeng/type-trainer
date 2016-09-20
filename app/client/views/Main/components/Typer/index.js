@@ -29,8 +29,6 @@ export default class Typer extends React.Component {
     if (nextProps.stage !== this.props.stage && nextProps.stage === COUNTDOWN) {
       // choose a new passage when the stage is switching to countdown
       this.selectText()
-    } else if (nextProps.stage !== this.props.stage && nextProps.stage === DONE) {
-      this.props.container.focus()
     }
   }
 

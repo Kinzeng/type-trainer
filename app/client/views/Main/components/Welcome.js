@@ -80,7 +80,8 @@ export default class Welcome extends React.Component {
           pretty random and don't really mean anything, but I'll try to add
           more passages as soon as possible. In the meantime,&nbsp;enjoy!
           <br /><br />
-          Click <span {...startProps}>here</span> to start or <Link {...infoProps}>here</Link> for more info.
+          Click <span {...startProps}>here</span> or press enter to start
+          or click <Link {...infoProps}>here</Link> for more info.
         </p>
         <p {...signatureProps}>{signature}</p>
       </div>
