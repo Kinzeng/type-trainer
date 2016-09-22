@@ -13,7 +13,7 @@ const resultsProps = {
 
 const statsProps = {
   style: {
-    margin: '0 0 20px',
+    margin: '0 0 14px',
     display: 'flex',
     flexFlow: 'column nowrap',
     alignItems: 'flex-start'

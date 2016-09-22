@@ -28,6 +28,12 @@ const linkProps = {
   }
 }
 
+const titleProps = {
+  style: {
+    fontWeight: 'bold'
+  }
+}
+
 const tableProps = {
   style: {
     width: '100%'
@@ -70,8 +76,8 @@ class Stats extends React.Component {
     }
   }
 
-  onKeyPress (e) {
-    if (e.which === 13) {
+  onKeyDown (e) {
+    if (e.keyCode === 13) {
       this.props.router.push('/')
     }
   }
@@ -85,7 +91,7 @@ class Stats extends React.Component {
       )
     }
 
-    keyListenerProps.onKeyPress = this.onKeyPress.bind(this)
+    keyListenerProps.onKeyDown = this.onKeyDown.bind(this)
 
     const clearStatsProps = {
       onClick: this.clearStats.bind(this),
@@ -150,7 +156,7 @@ class Stats extends React.Component {
         <BoxShadow {...boxProps}>
           <Link {...linkProps}>Type another passage</Link>
           <br />
-          <span style={{fontWeight: 'bold'}}>Overall Stats</span>
+          <span {...titleProps}>Overall Stats</span>
           <br />
           <table {...tableProps}>
             <tbody>
@@ -160,7 +166,7 @@ class Stats extends React.Component {
             </tbody>
           </table>
           <br />
-          <span style={{fontWeight: 'bold'}}>Last ten passages</span>
+          <span {...titleProps}>Last ten passages</span>
           <br />
           {last10}
           <br /><br />

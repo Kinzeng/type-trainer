@@ -36,7 +36,9 @@ const flexProps = {
 
 const boxProps = {
   containerStyle: {},
-  contentStyle: {}
+  contentStyle: {
+    padding: '35px 40px 40px'
+  }
 }
 
 const viewProps = {
@@ -93,14 +95,16 @@ class Main extends React.Component {
     this.setState({chars: this.state.chars + 1})
   }
 
-  onKeyPress (e) {
-    if ((this.props.stage === INIT || this.props.stage === DONE) && e.which === 13) {
+  onKeyDown (e) {
+    if ((this.props.stage === INIT || this.props.stage === DONE) && e.keyCode === 13) {
       this.props.startCountdown()
+    } else if (process.env.NODE_ENV !== 'production' && e.keyCode === 27) {
+      this.props.finishTyping(false)
     }
   }
 
   render () {
-    containerProps.onKeyPress = this.onKeyPress.bind(this)
+    containerProps.onKeyDown = this.onKeyDown.bind(this)
 
     const welcomeProps = {
       startCountdown: this.props.startCountdown

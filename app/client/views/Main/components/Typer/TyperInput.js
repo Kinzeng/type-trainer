@@ -86,6 +86,7 @@ export default class TyperInput extends React.Component {
       autoFocus: true,
       ref: (ref) => { this.input = ref },
       style: {
+        boxSizing: 'border-box',
         padding: '4px',
         width: '100%',
         outline: 'none',

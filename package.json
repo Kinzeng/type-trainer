@@ -37,6 +37,16 @@
   "devDependencies": {
     "nodemon": "^1.10.2"
   },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0",
+      "react"
+    ],
+    "ignore": [
+      "/node_modules/"
+    ]
+  },
   "engines": {
     "node": ">=0.12.7"
   }
