@@ -1,11 +1,12 @@
 
 var path = require('path')
 var webpack = require('webpack')
+var config = require('./config')
 
 var BUILD_DIR = path.resolve(__dirname, 'app', 'public', 'build')
 var APP_DIR = path.resolve(__dirname, 'app', 'client')
 
-var config = {
+module.exports = {
   stats: {
     assets: false,
     chunkModules: false,
@@ -21,7 +22,7 @@ var config = {
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
-    publicPath: 'http://localhost:3001/'
+    publicPath: config.host + ':' + config.port
   },
   module: {
     loaders: [
@@ -44,5 +45,3 @@ var config = {
     })
   ]
 }
-
-module.exports = config
