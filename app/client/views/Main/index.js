@@ -132,7 +132,8 @@ class Main extends React.Component {
     const resultsProps = {
       startCountdown: this.props.startCountdown,
       wpm: this.props.wpm,
-      accuracy: this.props.accuracy
+      accuracy: this.props.accuracy,
+      potentialWPM: this.props.potentialWPM
     }
 
     // display the welcome page if the user just got to the website
@@ -174,7 +175,8 @@ const mapStateToProps = (state) => {
     text: state.typer.text,
     longTypo: state.typer.longTypo,
     wpm: state.typer.wpm,
-    accuracy: state.typer.accuracy
+    accuracy: state.typer.accuracy,
+    potentialWPM: state.typer.potentialWPM
   }
 }
 

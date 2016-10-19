@@ -35,8 +35,9 @@ export function clearLongTypo () {
 // set the stage to done and calculate and store stats if necessary
 export function finishTyping (text, time, chars, saveStats, textIndex) {
   if (saveStats) {
-    const wpm = calculateWPM(text, time)
+    const wpm = calculateWPM(text.length, time)
     const accuracy = calculateAccuracy(text, chars)
+    const potentialWPM = calculateWPM(chars, time)
 
     // if there is no object stored in localStorage, use initial stats
 
@@ -76,10 +77,10 @@ export function finishTyping (text, time, chars, saveStats, textIndex) {
     // store the stats in localStorage so that the user's stats are saved even when leaving
     // the webpage
     window.localStorage.setItem('stats', JSON.stringify(stats))
-    return {type: FINISH_TYPING, time, chars, wpm, accuracy: `${accuracy}%`}
+    return {type: FINISH_TYPING, time, chars, wpm, accuracy: `${accuracy}%`, potentialWPM}
   }
 
-  return {type: FINISH_TYPING, wpm: null, accuracy: null}
+  return {type: FINISH_TYPING, wpm: null, accuracy: null, potentialWPM: null}
 }
 
 // set the current text that the user is typing

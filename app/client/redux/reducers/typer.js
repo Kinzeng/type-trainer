@@ -33,7 +33,8 @@ export default function (state = initialState, action) {
         ...state,
         stage: DONE,
         wpm: action.wpm,
-        accuracy: action.accuracy
+        accuracy: action.accuracy,
+        potentialWPM: action.potentialWPM
       }
     }
 

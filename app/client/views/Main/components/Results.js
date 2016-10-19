@@ -13,10 +13,7 @@ const resultsProps = {
 
 const statsProps = {
   style: {
-    margin: '0 0 14px',
-    display: 'flex',
-    flexFlow: 'column nowrap',
-    alignItems: 'flex-start'
+    margin: '0 0 14px'
   }
 }
 
@@ -60,10 +57,13 @@ export default class Results extends React.Component {
       // if the user finished typing a passage
       return (
         <div {...resultsProps}>
-          <div {...statsProps}>
-            <p {...statsTextProps}>Speed: {this.props.wpm} WPM</p>
-            <p {...statsTextProps}>Accuracy: {this.props.accuracy}</p>
-          </div>
+          <table {...statsProps}>
+            <tbody>
+              <tr><td>Speed:</td><td>{this.props.wpm} WPM</td></tr>
+              <tr><td>Accuracy:</td><td>{this.props.accuracy}</td></tr>
+              <tr><td>Potential Speed:</td><td>{this.props.potentialWPM} WPM</td></tr>
+            </tbody>
+          </table>
           <div {...actionsProps}>
             <Link {...linkProps}>More stats</Link>
             <div {...startProps}>Another one!</div>
