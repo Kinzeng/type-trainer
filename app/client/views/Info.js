@@ -75,7 +75,7 @@ const githubProps = {
 }
 
 const emailProps = {
-  href: 'mailto:zhang4444@gmail.com',
+  href: 'mailto:kevin@kzhang.io',
   style: {
     textDecoration: 'none',
     color: green()
@@ -103,7 +103,7 @@ export default class Info extends React.Component {
           especially since I get to fit the app to my own aesthetic tastes (I think typeracer's
           design and colors leave a lot to be desired). If you're interested in the source code
           for this project, it is available on my <Link {...githubProps}>github</Link>. If you have
-          any questions or comments, feel free to email me at <a {...emailProps}>zhang4444@gmail.com</a> and
+          any questions or comments, feel free to email me at <a {...emailProps}>kevin@kzhang.io</a> and
           I'll get back to you as soon as I can!
         </p>
       </BoxShadow>
